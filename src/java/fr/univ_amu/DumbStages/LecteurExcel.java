@@ -1,15 +1,18 @@
 package fr.univ_amu.DumbStages;
 
 
+import java.fr.univ_amu.DumbStages.donnees.Etudiant;
 import java.io.IOException;
 import java.util.Scanner;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.xssf.usermodel.XSSFSheet; //?
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
 public class LecteurExcel {
 
     private XSSFWorkbook monExcel;
+    private XSSFSheet monExcel2; //?
 
     public LecteurExcel(String path) throws IOException, InvalidFormatException {
         this.monExcel = new XSSFWorkbook(new java.io.File(path));
@@ -18,6 +21,19 @@ public class LecteurExcel {
     public XSSFWorkbook getFichier(){
         return monExcel;
     }
+    public XSSFSheet getmonExcel2() {
+        return monExcel2;
+    }//?
+
+    public void AjouterEtudiant (Etudiant etudiant) { //Deuxième point du forum de stage
+        this.monExcel2.createRow(this.monExcel2.getLastRowNum()+1).createCell(0).setCellValue(etudiant.getNom() +
+                etudiant.getPrenom() +", "+ etudiant.getGroupe());
+    } //?
+
+        public void AjouterEntreprise (fr.univ_amu.DumbStages.donnees.Entreprise entreprise) { //Deuxième point du forum de stage
+        this.monExcel2.getRow(0).createCell(this.monExcel2.getRow(0).getLastCellNum()+1).setCellValue(
+                entreprise.getNom_en());
+    } //?
 
 
     public static void main(String[] args) {
