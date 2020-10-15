@@ -1,25 +1,47 @@
-package java.fr.univ_amu.DumbStages.donnees;
+package fr.univ_amu.DumbStages.donnees;
+
+import java.lang.*;
+
 
 public class Etudiant {
-    private String Nom;
-    private String Prenom;
-    private String Groupe;
 
-    public Etudiant(String nom, String prenom, String groupe) {
-        Nom = nom;
-        Prenom = prenom;
-        Groupe = groupe;
+    private String nom_et;
+    private String prenom_et;
+    private String groupe_et;
+
+    Etudiant(String nom, String prenom){
+        //formatage du nom et prenom
+        this.nom_et = nom.toUpperCase();
+
+
+
+        char premiereLettre = Character.toUpperCase(prenom.charAt(0));
+        String reste = prenom.substring(1);
+
+        this.prenom_et = premiereLettre + reste.toLowerCase();
     }
 
     public String getNom() {
-        return Nom;
+        return nom_et;
     }
 
     public String getPrenom() {
-        return Prenom;
+        return prenom_et;
     }
 
-    public String getGroupe() {
-        return Groupe;
+    public void setNom(String nom){
+        this.nom_et = nom;
+    }
+
+    public void setPrenom(String prenom) {
+        this.prenom_et = prenom;
+    }
+
+    public String getGroupe_et() {
+        return groupe_et;
+    }
+
+    public void setGroupe_et(String groupe_et) {
+        this.groupe_et = groupe_et;
     }
 }
