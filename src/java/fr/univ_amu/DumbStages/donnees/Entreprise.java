@@ -6,9 +6,10 @@ public class Entreprise {
     private String[] representants;
     private String url;
 
-    Entreprise(String nom, String[] rpz){
+    public Entreprise(String nom, String[] rpz, String url){
         this.nom_en = nom;
         this.representants = rpz;
+        this.url = url;
     }
 
     public String getNom_en() {
@@ -21,6 +22,13 @@ public class Entreprise {
 
     public String getUrl() {
         return this.url;
+    }
+
+    public void show()
+    {
+        System.out.println("Nom: "+this.getNom_en());
+        System.out.println("Représentants: "+this.getRepresentants()[0]);
+        System.out.println("URL: "+this.getUrl());
     }
 
 /*
