@@ -1,4 +1,4 @@
-package java.fr.univ_amu.DumbStages.donnees;
+package fr.univ_amu.DumbStages.donnees;
 
 public class Etudiant {
     private String Nom;
