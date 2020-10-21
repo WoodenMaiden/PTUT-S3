@@ -5,6 +5,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
+import org.apache.poi.ss.usermodel.Cell;
 import org.apache.poi.ss.usermodel.Row;
 import org.apache.poi.xssf.usermodel.XSSFSheet; //?
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
@@ -38,12 +39,17 @@ public class LecteurExcel {
     public static void main(String[] args) {
 
         try {
-            System.out.println("entrez le chemin absolu vers votre fichier :");
+            System.out.println("entrez le chemin absolu vers votre fichier d'ENTREE :");
             Scanner entree = new Scanner(System.in);
             String path = entree.nextLine();
             LecteurExcel excelALire = new LecteurExcel(path);
+            System.out.println("fichier d'entrée accédé !");
+
+            System.out.println("entrez le chemin absolu vers votre fichier de SORTIE :");
+            entree = new Scanner(System.in);
+            path = entree.nextLine();
             entree.close();
-            System.out.println("fichier accédé !");
+            System.out.println("fichier de sortie accédé !");
 
             XSSFWorkbook fichier = excelALire.getFichier();
 
@@ -56,12 +62,33 @@ public class LecteurExcel {
                 if (row.getRowNum() != 0)
                 {
                     String[] representants = new String[1];
-                    representants[0] = row.getCell(1).getStringCellValue();
-                    fr.univ_amu.DumbStages.donnees.Entreprise ent = new fr.univ_amu.DumbStages.donnees.Entreprise(row.getCell(0).getStringCellValue(), representants, row.getCell(2).getStringCellValue());
-                    MesEntreprises.add( ent );
-                    ent.show();
+                    representants[0] = "Inconnu";
+                    String nom_en = "Inconnu";
+                    String url = "Inconnu";
+                    for (Cell cell: row) {
+                        if (cell.getColumnIndex() == 0) nom_en = cell.getStringCellValue();
+                        else if (cell.getColumnIndex() == 1) representants[0] = cell.getStringCellValue();
+                        else if (cell.getColumnIndex() == 2) url = cell.getStringCellValue();
+                    }
+                    fr.univ_amu.DumbStages.donnees.Entreprise ent = new fr.univ_amu.DumbStages.donnees.Entreprise(nom_en, representants, url);
+                    MesEntreprises.add(ent);
+                    //ent.show();
                 }
             }
+
+            fr.univ_amu.DumbStages.GenerateurHtml html = new fr.univ_amu.DumbStages.GenerateurHtml(path);
+            html.setDate("date au pif");
+            html.DebutTableau();
+
+            for (fr.univ_amu.DumbStages.donnees.Entreprise ent: MesEntreprises) {
+                html.AjouterEntreprise(ent);
+            }
+
+            html.FinTableau ();
+            html.setFinHtml();
+
+            html.EcritDansFichier(html.CodeHtml);
+
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.getStackTrace();

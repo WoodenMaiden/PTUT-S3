@@ -10,9 +10,10 @@ public class GenerateurHtml {
     private String FinHtml;
     public String CodeHtml;
 
-    GenerateurHtml(String strEntree, String strSortie) throws IOException { //Constructeur
-        this.Entree = new File(strEntree);
+    GenerateurHtml(String strSortie) throws IOException { //Constructeur
+
         this.Sortie = new File(strSortie);
+
         if (this.Sortie.createNewFile()) {
             System.out.println("fichier créé !"); //Création de la première partie de l'html dans DebutHtml
             this.DebutHtml = new String("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n" +
@@ -34,7 +35,7 @@ public class GenerateurHtml {
                     "\n" +
                     "<div style=\"text-align: center;\"><img style=\"width: 623px; height: 7px;\" alt=\"\" src=\"forum_fichiers/TraitCourant.gif\"></div>\n");
             this.FinHtml = new String("</body></html>"); //Création de la première partie de l'html dans FinHtml
-            this.CodeHtml = new String ("<h1><span style=\"color: rgb(51, 102, 255);\"> Forum entreprise du");//Création du reste du code dans CodeHtml
+            this.CodeHtml = new String ("<h1><span style=\"color: rgb(51, 102, 255);\"> Forum entreprise du ");//Création du reste du code dans CodeHtml
         }
     }
 
@@ -66,6 +67,10 @@ public class GenerateurHtml {
         this.CodeHtml = this.CodeHtml + "</td><td><a href=\""+uneEntreprise.getUrl()+"\">"+uneEntreprise.getNom_en()+"</a></td>\n</tr>";
     }//Insert dans CodeHtml une ligne du tableau contenant le nom de l'entreprise, des représentants, ainsi que l'url de leur site
 
+    public void setFinHtml() {
+        this.CodeHtml = this.CodeHtml + this.FinHtml;
+    }
+
     public String getDebutHtml() {
         return DebutHtml;
     }
@@ -80,8 +85,8 @@ public class GenerateurHtml {
         FichierEcriture.close();
     } //Ecrit Texte dans le fichier Sortie /!\ Si utilisé deux fois sur le même fichier, le premier contenu sera remplacé par le deuxième
 
-    public static void main(String[] args) throws IOException {
+    /*public static void main(String[] args) throws IOException {
         GenerateurHtml gen = new GenerateurHtml("/amuhome/d19002305/Bureau/Logo.png", "/amuhome/d19002305/Bureau/masortie3.html");
         gen.EcritDansFichier(gen.getDebutHtml() + "<h1>TEST</h1>" + gen.getFinHtml());
-    }
+    }*/
 }

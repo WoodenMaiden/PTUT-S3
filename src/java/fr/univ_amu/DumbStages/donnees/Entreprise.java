@@ -6,7 +6,7 @@ public class Entreprise {
     private String[] representants;
     private String url;
 
-    public Entreprise(String nom, String[] rpz, String url){
+    public Entreprise(String nom, String[] rpz, String url) {
         this.nom_en = nom;
         this.representants = rpz;
         this.url = url;
@@ -16,12 +16,24 @@ public class Entreprise {
         return this.nom_en;
     }
 
+    public void setNom_en(String nom) {
+        this.nom_en = nom;
+    }
+
     public String[] getRepresentants() {
         return this.representants;
     }
 
+    public void setRepresentants(String rpz) {
+        this.representants[0] = rpz;
+    }
+
     public String getUrl() {
         return this.url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
     }
 
     public void show()
