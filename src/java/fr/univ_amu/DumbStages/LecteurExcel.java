@@ -1,7 +1,7 @@
 package fr.univ_amu.DumbStages;
 
 
-import java.fr.univ_amu.DumbStages.donnees.Etudiant;
+import java.fr.univ_amu.DumbStages.donnees.*;
 import java.io.IOException;
 import java.util.Scanner;
 
@@ -25,7 +25,7 @@ public class LecteurExcel {
         return maFeuille;
     }//?
 
-    public void AjouterEtudiant (Etudiant etudiant) { //Deuxième point du forum de stage
+    public void AjouterEtudiant (fr.univ_amu.DumbStages.donnees.Etudiant etudiant) { //Deuxième point du forum de stage
         this.maFeuille.createRow(this.maFeuille.getLastRowNum()+1).createCell(0).setCellValue(etudiant.getNom() +
                 etudiant.getPrenom() +", "+ etudiant.getGroupe());
     } //?

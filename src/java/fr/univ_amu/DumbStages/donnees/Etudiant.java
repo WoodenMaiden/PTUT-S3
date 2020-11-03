@@ -37,11 +37,11 @@ public class Etudiant {
         this.prenom_et = prenom;
     }
 
-    public String getGroupe_et() {
+    public String getGroupe() {
         return groupe_et;
     }
 
-    public void setGroupe_et(String groupe_et) {
+    public void setGroupe(String groupe_et) {
         this.groupe_et = groupe_et;
     }
 }
