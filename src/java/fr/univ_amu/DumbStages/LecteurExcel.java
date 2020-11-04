@@ -1,5 +1,6 @@
 package fr.univ_amu.DumbStages;
 
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
 import java.util.Vector;
@@ -88,6 +89,22 @@ public class LecteurExcel {
             html.setFinHtml();
 
             html.EcritDansFichier(html.CodeHtml);
+
+            String filename = "D:/Tableau_Etudiant_Entreprises.xls" ;
+            XSSFWorkbook workbook = new XSSFWorkbook();
+            XSSFSheet sheet = workbook.createSheet("FirstSheet");
+
+            Row row = sheet.createRow((short)0);
+
+            for (int i = 0 ; i < MesEntreprises.size(); ++i) {
+                row.createCell(i+1).setCellValue(MesEntreprises.elementAt(i).getNom_en());
+            }
+
+            FileOutputStream fileOut = new FileOutputStream(filename);
+            workbook.write(fileOut);
+            fileOut.close();
+            workbook.close();
+            System.out.println("Your excel file has been generated!");
 
         } catch (Exception e) {
             System.out.println(e.getMessage());
