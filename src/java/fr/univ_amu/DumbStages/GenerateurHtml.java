@@ -40,7 +40,7 @@ public class GenerateurHtml {
     }
 
     public void setDate(String Date) {
-        this.CodeHtml = CodeHtml + Date + " 23 janvier 2020</span></h1>";
+        this.CodeHtml = CodeHtml + Date + "</span></h1>";
     }//Insert dans Codehtml l'Html affichant le titre de la page
 
     public void DebutTableau () {
