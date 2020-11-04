@@ -6,7 +6,7 @@ public class Entreprise {
     private String[] representants;
     private String url;
 
-    Entreprise(String nom, String[] rpz){
+    public Entreprise(String nom, String[] rpz){
         this.nom_en = nom;
         this.representants = rpz;
     }

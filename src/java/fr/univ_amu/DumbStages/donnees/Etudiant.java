@@ -9,7 +9,7 @@ public class Etudiant {
     private String prenom_et;
     private String groupe_et;
 
-    Etudiant(String nom, String prenom){
+    public Etudiant(String nom, String prenom){
         //formatage du nom et prenom
         this.nom_et = nom.toUpperCase();
 

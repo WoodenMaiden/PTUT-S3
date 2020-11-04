@@ -1,6 +1,7 @@
 package fr.univ_amu.DumbStages;
 
-import fr.univ_amu.DumbStages.donnees.*;
+import fr.univ_amu.DumbStages.donnees.Entreprise;
+import fr.univ_amu.DumbStages.donnees.Etudiant;
 import java.io.*;
 
 public class GenerateurHtml {
@@ -58,7 +59,7 @@ public class GenerateurHtml {
         this.CodeHtml = this.CodeHtml + " </tbody></table>";
     } //Insert dans CodeHtml la fin du tableau en html
 
-    public void AjouterEntreprise (fr.univ_amu.DumbStages.donnees.Entreprise uneEntreprise){
+    public void AjouterEntreprise (Entreprise uneEntreprise){
         this.CodeHtml = this.CodeHtml + "    <tr>\n" +
                 "        <td> "+uneEntreprise.getNom_en()+"</td> <td>";
         for (String rep : uneEntreprise.getRepresentants())
