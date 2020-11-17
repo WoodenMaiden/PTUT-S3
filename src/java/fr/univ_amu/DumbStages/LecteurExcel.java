@@ -6,8 +6,7 @@ import java.util.Scanner;
 import java.util.Vector;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
-import org.apache.poi.ss.usermodel.Cell;
-import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet; //?
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
 
@@ -40,6 +39,9 @@ public class LecteurExcel {
     public static void main(String[] args) {
 
         try {
+
+            // Entree D:\Entreprises PTUT.xlsx
+
             System.out.println("entrez le chemin absolu vers votre fichier d'ENTREE :");
             Scanner entree = new Scanner(System.in);
             String path = entree.nextLine();
@@ -90,14 +92,27 @@ public class LecteurExcel {
 
             html.EcritDansFichier(html.CodeHtml);
 
+            // Sortie D:/Tableau_Etudiant_Entreprises.xls
+
             String filename = "D:/Tableau_Etudiant_Entreprises.xls" ;
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet("FirstSheet");
 
+            CellStyle borderedCellStyle = workbook.createCellStyle();
+            borderedCellStyle.setBorderBottom(BorderStyle.THIN);
+            borderedCellStyle.setBorderLeft(BorderStyle.THIN);
+            borderedCellStyle.setBorderRight(BorderStyle.THIN);
+            borderedCellStyle.setBorderTop(BorderStyle.THIN);
+            borderedCellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
+            borderedCellStyle.setAlignment(HorizontalAlignment.CENTER);
+
             Row row = sheet.createRow((short)0);
+            row.setHeightInPoints(40);
 
             for (int i = 0 ; i < MesEntreprises.size(); ++i) {
                 row.createCell(i+1).setCellValue(MesEntreprises.elementAt(i).getNom_en());
+                row.getCell(i + 1).setCellStyle(borderedCellStyle);
+                sheet.autoSizeColumn(i+1);
             }
 
             FileOutputStream fileOut = new FileOutputStream(filename);
