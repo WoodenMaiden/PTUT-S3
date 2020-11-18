@@ -1,6 +1,5 @@
 package fr.univ_amu.DumbStages;
 
-import fr.univ_amu.DumbStages.donnees.*;
 import java.io.*;
 
 public class GenerateurHtml {
