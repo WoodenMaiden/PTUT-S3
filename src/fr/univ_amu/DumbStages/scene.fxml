@@ -50,14 +50,19 @@
                   <Insets top="70.0" />
                </StackPane.margin>
             </Label>
-            <Button mnemonicParsing="false" text="Ouvrir" textFill="#15123b">
-               <opaqueInsets>
-                  <Insets />
-               </opaqueInsets>
+            <HBox alignment="CENTER" prefHeight="50.0" prefWidth="600.0" spacing="20.0">
+               <children>
+                  <Button fx:id="btnFolder" mnemonicParsing="false" onAction="#handleFolderAction" text="Ouvrir" textFill="#15123b">
+                     <opaqueInsets>
+                        <Insets />
+                     </opaqueInsets>
+                  </Button>
+                  <Button fx:id="btnValider" mnemonicParsing="false" onAction="#handleValiderAction" text="Valider" />
+               </children>
                <StackPane.margin>
                   <Insets top="140.0" />
                </StackPane.margin>
-            </Button>
+            </HBox>
          </children>
       </StackPane>
       <HBox prefHeight="43.0" prefWidth="600.0" />

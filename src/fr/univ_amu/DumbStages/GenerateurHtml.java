@@ -1,5 +1,6 @@
 package fr.univ_amu.DumbStages;
 
+import fr.univ_amu.DumbStages.donnees.*;
 import java.io.*;
 
 public class GenerateurHtml {
@@ -10,7 +11,7 @@ public class GenerateurHtml {
     public String CodeHtml;
 
     GenerateurHtml(String strSortie) throws IOException { //Constructeur
-
+        System.out.println("Path = " + strSortie);
         this.Sortie = new File(strSortie);
 
         if (this.Sortie.createNewFile()) {

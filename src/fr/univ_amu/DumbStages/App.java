@@ -1,5 +1,7 @@
 package fr.univ_amu.DumbStages;
 
+
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
 import javafx.scene.Parent;
