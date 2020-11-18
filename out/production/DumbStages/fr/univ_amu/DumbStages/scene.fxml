@@ -24,7 +24,7 @@
             </ImageView>
             <Label alignment="CENTER_RIGHT" text="Générateur de forum" textFill="#15123b">
                <font>
-                  <Font name="Montserrat Light" size="13.0" />
+                  <Font name="Microsoft JhengHei" size="13.0" />
                </font>
                <HBox.margin>
                   <Insets left="310.0" />
@@ -44,7 +44,7 @@
             </ImageView>
             <Label fx:id="textid" text="Glisser le fichier excel" textAlignment="CENTER" textFill="#15123b">
                <font>
-                  <Font name="Montserrat Light" size="12.0" />
+                  <Font name="Microsoft JhengHei" size="12.0" />
                </font>
                <StackPane.margin>
                   <Insets top="70.0" />
@@ -56,8 +56,14 @@
                      <opaqueInsets>
                         <Insets />
                      </opaqueInsets>
+                     <font>
+                        <Font name="Microsoft JhengHei" size="12.0" />
+                     </font>
                   </Button>
-                  <Button fx:id="btnValider" mnemonicParsing="false" onAction="#handleValiderAction" text="Valider" />
+                  <Button fx:id="btnValider" mnemonicParsing="false" onAction="#handleValiderAction" text="Valider">
+                     <font>
+                        <Font name="Microsoft JhengHei" size="12.0" />
+                     </font></Button>
                </children>
                <StackPane.margin>
                   <Insets top="140.0" />
