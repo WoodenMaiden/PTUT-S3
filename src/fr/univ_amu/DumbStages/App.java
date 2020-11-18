@@ -30,6 +30,7 @@ public class App extends Application{
 
         Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
         Scene scene = new Scene(root);
+        stage.getIcons().add(new Image(getClass().getResourceAsStream("resources/Icon.png")));
         stage.setTitle("IUT Stage");
         stage.setScene(scene);
         stage.setResizable(false);

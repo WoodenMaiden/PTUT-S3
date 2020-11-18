@@ -14,7 +14,7 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.List;
 
-public class sceneControler {
+public class SceneControler {
 
 
     @FXML
@@ -43,15 +43,15 @@ public class sceneControler {
     private void handleDragOver(DragEvent event) {
         if (event.getDragboard().hasFiles()){
             event.acceptTransferModes(TransferMode.ANY);
-            drop.setImage(new Image(getClass().getResourceAsStream("DownloadHover.png")));
+            drop.setImage(new Image(getClass().getResourceAsStream("resources/DownloadHover.png")));
         }
         else
-            drop.setImage(new Image(getClass().getResourceAsStream("Download.png")));
+            drop.setImage(new Image(getClass().getResourceAsStream("resources/Download.png")));
     }
 
     @FXML
     private void handleDragExit(DragEvent event) {
-            drop.setImage(new Image(getClass().getResourceAsStream("Download.png")));
+            drop.setImage(new Image(getClass().getResourceAsStream("resources/Download.png")));
     }
 
 }
