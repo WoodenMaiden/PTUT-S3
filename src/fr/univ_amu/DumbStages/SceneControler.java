@@ -83,14 +83,12 @@ public class SceneControler {
     void handleValiderAction(ActionEvent event) {
         String str = excel.getName();
         String strExtension = str.substring(str.indexOf('.'));
-        if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX")  ){
+        if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
             textid.setText("Fichier accepter");
             LecteurExcel.Start();
         }
         else
             textid.setText("Fichier invalide");
-
-        System.out.println(strExtension.length());
     }
 
 }

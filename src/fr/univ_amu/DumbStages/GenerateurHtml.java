@@ -1,58 +1,77 @@
 package fr.univ_amu.DumbStages;
 
 import fr.univ_amu.DumbStages.donnees.*;
+
+import java.awt.*;
 import java.io.*;
 
 public class GenerateurHtml {
     private File Entree;
-    private File Sortie;
-    private String DebutHtml;
+    private File Html;
     private String FinHtml;
-    public String CodeHtml;
+    private String CodeHtml;
 
     GenerateurHtml(String strSortie) throws IOException { //Constructeur
-        System.out.println("Path = " + strSortie);
-        this.Sortie = new File(strSortie);
+        this.Html = new File(strSortie);
 
-        if (this.Sortie.createNewFile()) {
-            System.out.println("fichier créé !"); //Création de la première partie de l'html dans DebutHtml
-            this.DebutHtml = new String("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n" +
-                    "<html><head>\n" +
-                    "\t<meta content=\"text/html; charset=UTF-8\" http-equiv=\"content-type\">\n" +
-                    "\t<title>Forum entreprise du 23 janvier 2020</title>\n" +
-                    "\t<link rel=\"stylesheet\" href=\"forum_fichiers/uncss.css\" type=\"text/css\" media=\"screen\" title=\"no title\" charset=\"utf-8\">\n" +
+        if (this.Html.createNewFile()) {
+            System.out.println("Fichier HTML créé !"); //Création de la première partie de l'html dans DebutHtml
+            this.CodeHtml = new String("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n" +
+                    "<html>\n" +
+                    "\n" +
+                    "<head>\n" +
+                    "  <meta content=\"text/html; charset=UTF-8\" http-equiv=\"content-type\">\n" +
+                    "  <title>IUT Stage</title>\n" +
+                    "  <link href=\"https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Poppins:wght@400;600&display=swap\" rel=\"stylesheet\">\n" +
+                    "  <link href=\"https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500&display=swap\" rel=\"stylesheet\">\n" +
+                    "  <link rel=\"stylesheet\" href=\"style.css\" type=\"text/css\" media=\"screen\" title=\"no title\" charset=\"utf-8\">\n" +
                     "</head>\n" +
                     "\n" +
                     "<body>\n" +
-                    "<div style=\"text-align: center;\">\n" +
-                    "    <big>   \n" +
-                    "        M. Laporte<br>\n" +
-                    "        <a href=\"mailto:marc.laporte@univ-amu.fr\">marc.laporte@univ-amu.fr </a> <br>\n" +
-                    "        I.U.T. d'Aix-Marseille <br>\n" +
-                    "        Département Informatique site d'Aix-en-Provence\n" +
-                    "    </big>\n" +
-                    "</div>\n" +
+                    "  <header>\n" +
+                    "    <h1>IUT </h1>\n" +
+                    "    <h2> Forum entreprise du ");
+            this.FinHtml = new String(" </div>\n" +
                     "\n" +
-                    "<div style=\"text-align: center;\"><img style=\"width: 623px; height: 7px;\" alt=\"\" src=\"forum_fichiers/TraitCourant.gif\"></div>\n");
-            this.FinHtml = new String("</body></html>"); //Création de la première partie de l'html dans FinHtml
-            this.CodeHtml = new String ("<h1><span style=\"color: rgb(51, 102, 255);\"> Forum entreprise du ");//Création du reste du code dans CodeHtml
+                    "\n" +
+                    "  <footer>\n" +
+                    "    <p>\n" +
+                    "      M. Laporte\n" +
+                    "      <a href=\"mailto:marc.laporte@univ-amu.fr\">marc.laporte@univ-amu.fr </a>\n" +
+                    "    </p>\n" +
+                    "\n" +
+                    "    <p>\n" +
+                    "      I.U.T. d'Aix-Marseille\n" +
+                    "      Département Informatique site d'Aix-en-Provence\n" +
+                    "    </p>\n" +
+                    "  </footer>\n" +
+                    "</body>\n" +
+                    "\n" +
+                    "</html>"); //Création de la première partie de l'html dans FinHtml
         }
     }
 
     public void setDate(String Date) {
-        this.CodeHtml = CodeHtml + Date + "</span></h1>";
+        this.CodeHtml = CodeHtml + Date + "</h2>\n" +
+                "  </header>\n" +
+                "\n" +
+                "  <div>";
     }//Insert dans Codehtml l'Html affichant le titre de la page
 
     public void DebutTableau () {
-        this.CodeHtml = CodeHtml + "\n" +
+        this.CodeHtml = CodeHtml + "<table border=\"1\" cellpadding=\"15\">\n" +
                 "\n" +
-                " <table border=\"1\" cellpadding=\"10\">\n" +
-                "    <caption> <h2>Liste des entreprises participant au forum</h2> </caption>\n" +
-                "  <tbody>\n" +
-                "    <tr>\n" +
-                "        <th> Nom Entreprise </th>\n" +
-                "        <th> Repr&eacute;sentant Entreprise </th>\n" +
-                "\t    <th> Lien Web Entreprise </th>";
+                "      <caption>\n" +
+                "        <h3>\n" +
+                "          Liste des entreprises participant au forum\n" +
+                "        </h3>\n" +
+                "      </caption>\n" +
+                "\n" +
+                "      <tbody>\n" +
+                "        <tr>\n" +
+                "          <th id=\"thLeft\"> Nom Entreprise </th>\n" +
+                "          <th> Repr&eacute;sentant Entreprise </th>\n" +
+                "          <th id=\"thRight\"> Lien Web Entreprise </th>";
     } //Insert dans CodeHtml le début du tableau en html
 
     public void FinTableau () {
@@ -71,17 +90,13 @@ public class GenerateurHtml {
         this.CodeHtml = this.CodeHtml + this.FinHtml;
     }
 
-    public String getDebutHtml() {
-        return DebutHtml;
-    }
-
     public String getFinHtml() {
         return FinHtml;
     }
 
-    public void EcritDansFichier(String Texte) throws IOException {
-        FileWriter FichierEcriture = new FileWriter(this.Sortie);
-        FichierEcriture.write(Texte);
+    public void EcritDansFichier() throws IOException {
+        FileWriter FichierEcriture = new FileWriter(Html);
+        FichierEcriture.write(CodeHtml);
         FichierEcriture.close();
     } //Ecrit Texte dans le fichier Sortie /!\ Si utilisé deux fois sur le même fichier, le premier contenu sera remplacé par le deuxième
 
@@ -89,4 +104,8 @@ public class GenerateurHtml {
         GenerateurHtml gen = new GenerateurHtml("/amuhome/d19002305/Bureau/Logo.png", "/amuhome/d19002305/Bureau/masortie3.html");
         gen.EcritDansFichier(gen.getDebutHtml() + "<h1>TEST</h1>" + gen.getFinHtml());
     }*/
+
+    public void OuvrirFichier() throws IOException {
+        Desktop.getDesktop().browse(Html.toURI());
+    }
 }

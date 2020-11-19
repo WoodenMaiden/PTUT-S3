@@ -42,10 +42,8 @@ public class LecteurExcel {
             String path = "";
             LecteurExcel excelALire = new LecteurExcel(SceneControler.path);
             System.out.println("Fichier d'entrée accédé !");
-            path = SceneControler.path.substring(0,SceneControler.path.lastIndexOf('\\')+1);
+            path = SceneControler.excel.getParent() + "\\index.html";
             System.out.println("Fichier de sortie accédé !");
-            System.out.println(path);
-
             XSSFWorkbook fichier = excelALire.getFichier();
 
             XSSFSheet mySheet = fichier.getSheetAt(0);
@@ -72,7 +70,7 @@ public class LecteurExcel {
             }
 
             GenerateurHtml html = new GenerateurHtml(path);
-            html.setDate("date au pif");
+            html.setDate("19/11/2020");
             html.DebutTableau();
 
             for (fr.univ_amu.DumbStages.donnees.Entreprise ent: MesEntreprises) {
@@ -81,12 +79,14 @@ public class LecteurExcel {
 
             html.FinTableau ();
             html.setFinHtml();
+            html.EcritDansFichier();
 
-            html.EcritDansFichier(html.CodeHtml);
+            GenerateurCss css = new GenerateurCss();
+            css.EcritDansFichier();
 
             // Sortie D:/Tableau_Etudiant_Entreprises.xls
 
-            String filename = "D:/Tableau_Etudiant_Entreprises.xls" ;
+            String filename = SceneControler.excel.getParent()+"\\Tableau_Etudiant_Entreprises.xls" ;
             XSSFWorkbook workbook = new XSSFWorkbook();
             XSSFSheet sheet = workbook.createSheet("FirstSheet");
 
@@ -111,8 +111,10 @@ public class LecteurExcel {
             workbook.write(fileOut);
             fileOut.close();
             workbook.close();
-            System.out.println("Fichier généré!");
+            System.out.println("Fichier XLS généré!");
 
+            html.OuvrirFichier();
+            System.out.println("Fichier HTML ouvert dans le navigateur");
         } catch (Exception e) {
             System.out.println(e.getMessage());
             e.getStackTrace();
@@ -122,7 +124,6 @@ public class LecteurExcel {
     }
 
     public static void main(String[] args) {
-
         App.launch(App.class,args);
     }
 }
