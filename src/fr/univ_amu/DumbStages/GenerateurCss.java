@@ -96,9 +96,6 @@ public class GenerateurCss {
                     "    border-top-left-radius: 50px;\n" +
                     "    border-collapse: collapse;\n" +
                     "    border-color: rgba(19, 22, 62, 0.253);\n" +
-                    "    -webkit-box-shadow: 0px 0px 61px -28px rgba(0, 0, 0, 0.41);\n" +
-                    "    -moz-box-shadow: 0px 0px 61px -28px rgba(0, 0, 0, 0.41);\n" +
-                    "    box-shadow: 0px 0px 61px -28px rgba(0, 0, 0, 0.41);\n" +
                     "    -webkit-animation: slide-top 0.8s ease-out both;\n" +
                     "    animation: slide-top 0.8s ease-out both;\n" +
                     "}\n" +
@@ -195,5 +192,6 @@ public class GenerateurCss {
         FileWriter FichierEcriture = new FileWriter(Css);
         FichierEcriture.write(script);
         FichierEcriture.close();
+        System.out.println("Fichier CSS généré !");
     }
 }
