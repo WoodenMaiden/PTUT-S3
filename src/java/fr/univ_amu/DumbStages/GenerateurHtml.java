@@ -1,13 +1,12 @@
 package fr.univ_amu.DumbStages;
 
-import fr.univ_amu.DumbStages.donnees.*;
+//import fr.univ_amu.DumbStages.donnees.*;
+import fr.univ_amu.DumbStages.donnees.Entreprise;
+
 import java.io.*;
 
 public class GenerateurHtml {
-    private File Entree;
     private File Sortie;
-    private String DebutHtml;
-    private String FinHtml;
     public String CodeHtml;
 
     GenerateurHtml(String strSortie) throws IOException { //Constructeur
@@ -15,8 +14,9 @@ public class GenerateurHtml {
         this.Sortie = new File(strSortie);
 
         if (this.Sortie.createNewFile()) {
-            System.out.println("fichier créé !"); //Création de la première partie de l'html dans DebutHtml
-            this.DebutHtml = new String("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n" +
+            System.out.println("fichier créé !"); //Création de la première partie de l'html dans CodeHtml
+        }
+            this.CodeHtml = new String("<!DOCTYPE html PUBLIC \"-//W3C//DTD HTML 4.01//EN\" \"http://www.w3.org/TR/html4/strict.dtd\">\n" +
                     "<html><head>\n" +
                     "\t<meta content=\"text/html; charset=UTF-8\" http-equiv=\"content-type\">\n" +
                     "\t<title>Forum entreprise de 2020</title>\n" +
@@ -208,60 +208,69 @@ public class GenerateurHtml {
                     "    </big>\n" +
                     "</div>\n" +
                     "\n" +
-                    "<div style=\"text-align: center;\"><img style=\"width: 623px; height: 7px;\" alt=\"\" src=\"forum_fichiers/TraitCourant.gif\"></div>\n");
-            this.FinHtml = new String("</body></html>"); //Création de la première partie de l'html dans FinHtml
-            this.CodeHtml = new String ("<h1><span style=\"color: rgb(51, 102, 255);\"> Forum entreprise du ");//Création du reste du code dans CodeHtml
+                    "<div style=\"text-align: center;\"><img style=\"width: 623px; height: 7px;\" alt=\"\" src=\"forum_fichiers/TraitCourant.gif\"></div>\n"+
+                    "<h1><span style=\"color: rgb(51, 102, 255);\"> Forum entreprise du ");
         }
-    }
+
+
 
     public void setDate(String Date) {
-        this.CodeHtml = CodeHtml + Date + "</span></h1>";
-    }//Insert dans Codehtml l'Html affichant le titre de la page
-
-    public void DebutTableau () {
-        this.CodeHtml = CodeHtml + "\n" +
-                "\n" +
+        this.CodeHtml = CodeHtml + Date + "</span></h1>"
+                +"\n" +
                 " <table border=\"1\" cellpadding=\"10\">\n" +
                 "    <caption> <h2>Liste des entreprises participant au forum</h2> </caption>\n" +
                 "  <tbody>\n" +
                 "    <tr>\n" +
                 "        <th> Nom Entreprise </th>\n" +
-                "        <th> Repr&eacute;sentant Entreprise </th>\n" +
-                "\t    <th> Lien Web Entreprise </th>";
-    } //Insert dans CodeHtml le début du tableau en html
+                "        <th> Représentants Entreprise </th>\n" +
+                "\t    <th> Lien Web Entreprise </th>+\n"+
+                "<th> Zoom </th>";
+    }//Insert dans Codehtml l'Html affichant la date. Début du tableau en Html
+    // /!\ A APPELER EN PREMIER ET UNE SEULE FOIS
 
-    public void FinTableau () {
-        this.CodeHtml = this.CodeHtml + " </tbody></table>";
-    } //Insert dans CodeHtml la fin du tableau en html
+
 
     public void AjouterEntreprise (fr.univ_amu.DumbStages.donnees.Entreprise uneEntreprise){
         this.CodeHtml = this.CodeHtml + "    <tr>\n" +
                 "        <td> "+uneEntreprise.getNom_en()+"</td> <td>";
         for (String rep : uneEntreprise.getRepresentants())
             this.CodeHtml = this.CodeHtml + rep +"</br>";
-        this.CodeHtml = this.CodeHtml + "</td><td><a href=\""+uneEntreprise.getUrl()+"\">"+uneEntreprise.getNom_en()+"</a></td>\n</tr>";
-    }//Insert dans CodeHtml une ligne du tableau contenant le nom de l'entreprise, des représentants, ainsi que l'url de leur site
+        this.CodeHtml = this.CodeHtml + "</td><td><a href=\""+uneEntreprise.getUrl()+"\">"+uneEntreprise.getNom_en()+"</a></td>" +
+                "<td><a href="+uneEntreprise.getLienZoom()+"> </a> </br> Mot de passe: "+uneEntreprise.getMdpZoom()+"</td>\n</tr>";
+    }//Insert dans CodeHtml une ligne du tableau contenant le nom de l'entreprise, des représentants, l'url de leur site, le lien et le mpd Zoom
+    // A APPELER EN DEUXIEME (autant de fois qu'il le faut
 
-    public void setFinHtml() {
-        this.CodeHtml = this.CodeHtml + this.FinHtml;
-    }
+    public void FinTableau () {
+        this.CodeHtml = this.CodeHtml + " </tbody></table></body></html>";
+    } //Insert dans CodeHtml la fin du tableau en html et termine l'html
+    //A APPELER EN DERNIER ET UNE SEULE FOIS
 
-    public String getDebutHtml() {
-        return DebutHtml;
-    }
 
-    public String getFinHtml() {
-        return FinHtml;
-    }
-
-    public void EcritDansFichier(String Texte) throws IOException {
+    public void GenereLeFichierHtml() throws IOException {
         FileWriter FichierEcriture = new FileWriter(this.Sortie);
-        FichierEcriture.write(Texte);
+        FichierEcriture.write(CodeHtml);
         FichierEcriture.close();
-    } //Ecrit Texte dans le fichier Sortie /!\ Si utilisé deux fois sur le même fichier, le premier contenu sera remplacé par le deuxième
+    } //Ecrit Texte dans le fichier Sortie
+    // /!\ Si utilisé deux fois sur le même fichier, le premier contenu sera remplacé par le deuxième
 
-    /*public static void main(String[] args) throws IOException {
-        GenerateurHtml gen = new GenerateurHtml("/amuhome/d19002305/Bureau/Logo.png", "/amuhome/d19002305/Bureau/masortie3.html");
-        gen.EcritDansFichier(gen.getDebutHtml() + "<h1>TEST</h1>" + gen.getFinHtml());
-    }*/
+    public static void main(String[] args) throws IOException {
+        String[] tab = new String[3];
+        tab[0] = "Louis";
+        tab[1] = "Othon";
+        tab[2] = "Napoléon";
+        fr.univ_amu.DumbStages.donnees.Entreprise entreprise1 = new Entreprise("Entreprise1", tab,
+                "https://fr.wikipedia.org/wiki/Premier_Empire", "https://fr.wikipedia.org/wiki/Zoom", "*****");
+        fr.univ_amu.DumbStages.donnees.Entreprise entreprise2 = new Entreprise("Entreprise1", tab,
+                "https://fr.wikipedia.org/wiki/Premier_Empire", "https://fr.wikipedia.org/wiki/Zoom", "*****");
+        fr.univ_amu.DumbStages.donnees.Entreprise entreprise3 = new Entreprise("Entreprise1", tab,
+                "https://fr.wikipedia.org/wiki/Premier_Empire", "https://fr.wikipedia.org/wiki/Zoom", "*****");
+
+        GenerateurHtml GH = new GenerateurHtml("");
+        GH.setDate("1912");
+        GH.AjouterEntreprise(entreprise1);
+        GH.AjouterEntreprise(entreprise2);
+        GH.AjouterEntreprise(entreprise3);
+        GH.FinTableau();
+        GH.GenereLeFichierHtml();
+    }
 }
