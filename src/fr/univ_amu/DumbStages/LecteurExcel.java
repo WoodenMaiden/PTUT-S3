@@ -1,4 +1,5 @@
 package fr.univ_amu.DumbStages;
+import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Scanner;
@@ -8,6 +9,8 @@ import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.ss.usermodel.*;
 import org.apache.poi.xssf.usermodel.XSSFSheet; //?
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+
+import javax.swing.filechooser.FileSystemView;
 
 public class LecteurExcel {
 
@@ -39,10 +42,14 @@ public class LecteurExcel {
 
         try {
             System.out.println("Fichier en cours d'accés");
-            String path = "";
+            String desktopPath = ""; // Variable chemin du bureau
             LecteurExcel excelALire = new LecteurExcel(SceneControler.path);
             System.out.println("Fichier d'entrée accédé !");
-            path = SceneControler.excel.getParent() + "\\index.html";
+
+            FileSystemView fsv = FileSystemView.getFileSystemView(); // Recuperation du chemin du bureau
+            File desktopFile = fsv.getHomeDirectory();
+
+            desktopPath = desktopFile.getAbsolutePath()+ "\\index.html"; // Ajout du chemin dans la variable fait pour
             System.out.println("Fichier de sortie accédé !");
             XSSFWorkbook fichier = excelALire.getFichier();
 
@@ -69,7 +76,7 @@ public class LecteurExcel {
                 }
             }
 
-            GenerateurHtml html = new GenerateurHtml(path);
+            GenerateurHtml html = new GenerateurHtml(desktopPath);
             html.setDate("19/11/2020");
             html.DebutTableau();
 

@@ -100,11 +100,6 @@ public class GenerateurHtml {
         FichierEcriture.close();
     } //Ecrit Texte dans le fichier Sortie /!\ Si utilisé deux fois sur le même fichier, le premier contenu sera remplacé par le deuxième
 
-    /*public static void main(String[] args) throws IOException {
-        GenerateurHtml gen = new GenerateurHtml("/amuhome/d19002305/Bureau/Logo.png", "/amuhome/d19002305/Bureau/masortie3.html");
-        gen.EcritDansFichier(gen.getDebutHtml() + "<h1>TEST</h1>" + gen.getFinHtml());
-    }*/
-
     public void OuvrirFichier() throws IOException {
         Desktop.getDesktop().browse(Html.toURI());
     }

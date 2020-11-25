@@ -17,19 +17,6 @@ public class App extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-       /* VBox root = new VBox();
-        HBox navbar = new HBox();
-        ImageView IUT = new ImageView(new Image(getClass().getResourceAsStream("IUTStage.png")));
-        ImageView download = new ImageView(new Image(getClass().getResourceAsStream("Download.png")));
-        Label label = new Label("Generateur de forum");
-        IUT.setPreserveRatio(true);
-        IUT.setFitHeight(35);
-        download.setPreserveRatio(true);
-        download.setFitHeight(250);
-        root.setAlignment(Pos.CENTER);
-        navbar.getChildren().add(IUT);
-        root.getChildren().addAll(navbar,download);*/
-
         Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
         Scene scene = new Scene(root);
         stage.getIcons().add(new Image(getClass().getResourceAsStream("resources/Icon.png")));

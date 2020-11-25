@@ -34,7 +34,7 @@ public class GenerateurCss {
                     "\n" +
                     "header {\n" +
                     "    flex-direction: row;\n" +
-                    "    height: 70px;\n" +
+                    "    height: 50px;\n" +
                     "    display: flex;\n" +
                     "    width: 100%;\n" +
                     "    background-color: white;\n" +
@@ -47,13 +47,13 @@ public class GenerateurCss {
                     "}\n" +
                     "\n" +
                     "h1 {\n" +
-                    "    height: 70px;\n" +
-                    "    line-height: 70px;\n" +
+                    "    height: 50px;\n" +
+                    "    line-height: 50px;\n" +
                     "    width: 200px;\n" +
                     "    margin: 0;\n" +
                     "    font-family: 'Poppins', sans-serif;\n" +
                     "    background-color: white;\n" +
-                    "    font-size: 30px;\n" +
+                    "    font-size: 28px;\n" +
                     "    margin-left: 5%;\n" +
                     "}\n" +
                     "\n" +
