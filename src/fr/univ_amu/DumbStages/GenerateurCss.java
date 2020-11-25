@@ -34,7 +34,7 @@ public class GenerateurCss {
                     "\n" +
                     "header {\n" +
                     "    flex-direction: row;\n" +
-                    "    height: 50px;\n" +
+                    "    height: 60px;\n" +
                     "    display: flex;\n" +
                     "    width: 100%;\n" +
                     "    background-color: white;\n" +
@@ -43,17 +43,17 @@ public class GenerateurCss {
                     "    border-bottom: 1px;\n" +
                     "    border-style: solid;\n" +
                     "    justify-content: space-between;\n" +
-                    "    border-color: rgba(19, 22, 62, 0.103);\n" +
+                    "    border-color: rgba(19, 22, 62, 0.110);\n" +
                     "}\n" +
                     "\n" +
                     "h1 {\n" +
-                    "    height: 50px;\n" +
-                    "    line-height: 50px;\n" +
+                    "    height: 60px;\n" +
+                    "    line-height: 60px;\n" +
                     "    width: 200px;\n" +
                     "    margin: 0;\n" +
                     "    font-family: 'Poppins', sans-serif;\n" +
                     "    background-color: white;\n" +
-                    "    font-size: 28px;\n" +
+                    "    font-size: 25px;\n" +
                     "    margin-left: 5%;\n" +
                     "}\n" +
                     "\n" +
@@ -67,7 +67,7 @@ public class GenerateurCss {
                     "    font-size: 15px;\n" +
                     "    width: auto;\n" +
                     "    font-family: 'Poppins', sans-serif;\n" +
-                    "    line-height: 70px;\n" +
+                    "    line-height: 60px;\n" +
                     "    height: auto;\n" +
                     "    margin: 0;\n" +
                     "    padding: 0;\n" +
@@ -81,12 +81,12 @@ public class GenerateurCss {
                     "    font-size: 20px;\n" +
                     "    background-color: #13163E;\n" +
                     "    height: 10px;\n" +
-                    "    font-size: 17px;\n" +
+                    "    font-size: 16px;\n" +
                     "    color: white;\n" +
                     "    text-align: center;\n" +
                     "    line-height: 10px;\n" +
-                    "    font-weight: bold;\n" +
-                    "    width: 500px;\n" +
+                    "    font-weight: 400;\n" +
+                    "    width: 475px;\n" +
                     "    border-radius: 25px;\n" +
                     "}\n" +
                     "\n" +
@@ -95,13 +95,15 @@ public class GenerateurCss {
                     "    border-style: none;\n" +
                     "    border-top-left-radius: 50px;\n" +
                     "    border-collapse: collapse;\n" +
-                    "    border-color: rgba(19, 22, 62, 0.253);\n" +
+                    "    border-color: #13163E;\n" +
                     "    -webkit-animation: slide-top 0.8s ease-out both;\n" +
                     "    animation: slide-top 0.8s ease-out both;\n" +
+                    "    padding-bottom: 30px;\n" +
                     "}\n" +
                     "\n" +
                     "th {\n" +
                     "    border-spacing: 0px;\n" +
+                    "    font-weight: 400;\n" +
                     "    color: white;\n" +
                     "    background-color: #13163E;\n" +
                     "}\n" +
@@ -120,11 +122,11 @@ public class GenerateurCss {
                     "    background-color: white;\n" +
                     "    border: 1px;\n" +
                     "    border-style: solid;\n" +
-                    "    border-color: rgba(19, 22, 62, 0.103);\n" +
+                    "    border-color: rgba(19, 22, 62, 0.110);\n" +
                     "}\n" +
                     "\n" +
                     "td:hover {\n" +
-                    "    background-color: rgba(19, 22, 62, 0.103);\n" +
+                    "    background-color: rgba(19, 22, 62, 0.110);\n" +
                     "    transition-duration: 100ms;\n" +
                     "    cursor: pointer;\n" +
                     "}\n" +
@@ -149,7 +151,7 @@ public class GenerateurCss {
                     "    border-bottom: 0px;\n" +
                     "    align-content: center;\n" +
                     "    border-style: solid;\n" +
-                    "    border-color: rgba(19, 22, 62, 0.103);\n" +
+                    "    border-color: rgba(19, 22, 62, 0.110);\n" +
                     "}\n" +
                     "\n" +
                     "p {\n" +
