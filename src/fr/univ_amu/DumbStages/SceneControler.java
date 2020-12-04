@@ -85,7 +85,7 @@ public class SceneControler {
         String strExtension = str.substring(str.indexOf('.'));
         if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
             textid.setText("Fichier accepter");
-            LecteurExcel.Start();
+            LecteurExcel.start();
         }
         else
             textid.setText("Fichier invalide");

@@ -1,17 +1,13 @@
 package fr.univ_amu.DumbStages;
 
-import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 
 public class GenerateurCss {
 
-    private File Css;
-    private String script;
-    GenerateurCss()throws IOException {
-        this.Css = new File(SceneControler.excel.getParent() + "\\style.css");
-        if (this.Css.createNewFile()){
-            script = "html, body {\n" +
+    static public String script;
+    static public void css()throws IOException {
+        script = "html, body {\n" +
                     "    margin: 0;\n" +
                     "    padding: 0;\n" +
                     "    font-family: 'Work Sans', sans-serif;\n" +
@@ -98,7 +94,7 @@ public class GenerateurCss {
                     "    border-color: #13163E;\n" +
                     "    -webkit-animation: slide-top 0.8s ease-out both;\n" +
                     "    animation: slide-top 0.8s ease-out both;\n" +
-                    "    padding-bottom: 30px;\n" +
+                    "    margin-bottom: 50px;\n" +
                     "}\n" +
                     "\n" +
                     "th {\n" +
@@ -190,10 +186,4 @@ public class GenerateurCss {
                     "}";
         }
     }
-    public void EcritDansFichier() throws IOException {
-        FileWriter FichierEcriture = new FileWriter(Css);
-        FichierEcriture.write(script);
-        FichierEcriture.close();
-        System.out.println("Fichier CSS généré !");
-    }
-}
+
