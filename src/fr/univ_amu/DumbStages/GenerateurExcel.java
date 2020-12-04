@@ -1,4 +1,4 @@
-package java.fr.univ_amu.DumbStages;
+package fr.univ_amu.DumbStages;
 
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;

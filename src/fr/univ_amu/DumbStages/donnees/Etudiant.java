@@ -1,25 +1,25 @@
 package fr.univ_amu.DumbStages.donnees;
 
 public class Etudiant {
-    private String Nom;
-    private String Prenom;
-    private String Groupe;
+    private String nom;
+    private String prenom;
+    private String groupe;
 
     public Etudiant(String nom, String prenom, String groupe) {
-        Nom = nom;
-        Prenom = prenom;
-        Groupe = groupe;
+        this.nom = nom;
+        this.prenom = prenom;
+        this.groupe = groupe;
     }
 
     public String getNom() {
-        return Nom;
+        return nom;
     }
 
     public String getPrenom() {
-        return Prenom;
+        return prenom;
     }
 
     public String getGroupe() {
-        return Groupe;
+        return groupe;
     }
 }
