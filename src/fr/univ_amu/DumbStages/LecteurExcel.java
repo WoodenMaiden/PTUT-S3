@@ -140,7 +140,6 @@ public class LecteurExcel {
                 row.createCell(1).setCellValue("Prénom");
 
                 for (int i = 0; i < mesEntreprises.size(); ++i) {
-                    System.out.println("i "+i);
                     row.createCell(i + 2).setCellValue(mesEntreprises.elementAt(i).getNom_en());
                     row.getCell(i + 2).setCellStyle(borderedCellStyle);
                     sheet.autoSizeColumn(i + 2);
@@ -148,7 +147,6 @@ public class LecteurExcel {
 
                 int i = 0;
                 for (int k = 0; k < mesEtudiants.size(); ++k) {
-                    System.out.println("k "+k);
                     Etudiant monEtudiant = mesEtudiants.get(k);
                     if (monEtudiant.getGroupe().equals("Groupe "+j)) {
                         Row EtuRow = sheet.createRow((i + 3));

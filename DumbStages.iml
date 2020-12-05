@@ -41,5 +41,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" exported="" name="javafx 11.0.2 windows" level="project" />
   </component>
 </module>
