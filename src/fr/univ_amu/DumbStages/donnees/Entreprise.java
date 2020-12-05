@@ -5,6 +5,8 @@ public class Entreprise {
     private String nom_en;
     private String[] representants;
     private String url;
+    private String contactEmail;
+    private String lienZoom;
 
     public Entreprise(String nom, String[] rpz, String url) {
         this.nom_en = nom;
