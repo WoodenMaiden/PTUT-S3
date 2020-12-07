@@ -13,14 +13,14 @@ public class App extends Application{
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("load.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
         Scene scene = new Scene(root);
-        scene.getStylesheets().add("/resources/scene.css");
         stage.getIcons().add(new Image(getClass().getResourceAsStream("resources/Icon.png")));
         stage.setTitle("IUT Stage");
         stage.setScene(scene);
         stage.setResizable(false);
         stage.show();
+
     }
 
 }
