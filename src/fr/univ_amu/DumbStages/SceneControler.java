@@ -39,6 +39,16 @@ public class SceneControler {
     private ImageView drop;
 
     @FXML
+    private ImageView logo;
+
+
+
+    @FXML
+    static void animateLogo(){
+
+    }
+
+    @FXML
     private void handleDragDone(DragEvent event) {
 
     }
