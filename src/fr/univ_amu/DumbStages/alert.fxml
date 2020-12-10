@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.geometry.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<VBox fx:id="boxAlert" alignment="CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="87.0" prefWidth="189.0" style="-fx-background-color: #ffffffff;" stylesheets="@resources/scene.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univ_amu.DumbStages.Step1Controler">
+   <children>
+      <Label prefHeight="30.0" prefWidth="155.0" text="Fichier génerer sur le bureau" textFill="#15123b" />
+      <Button fx:id="close" mnemonicParsing="false" onAction="#closeWindow" text="Ok" textFill="#15123b">
+         <VBox.margin>
+            <Insets top="3.0" />
+         </VBox.margin></Button>
+   </children>
+</VBox>

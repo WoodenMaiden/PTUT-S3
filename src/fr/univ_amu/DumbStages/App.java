@@ -1,26 +1,43 @@
 package fr.univ_amu.DumbStages;
 
 
-import javafx.event.EventHandler;
+import javafx.animation.PauseTransition;
+import javafx.animation.SequentialTransition;
+import javafx.animation.Timeline;
 import javafx.fxml.FXMLLoader;
 import javafx.application.Application;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
+import javafx.util.Duration;
+
+import java.io.IOException;
+import java.util.concurrent.TimeUnit;
 
 public class App extends Application{
+    private Stage window;
 
     @Override
     public void start(Stage stage) throws Exception {
-        Parent root = FXMLLoader.load(getClass().getResource("scene.fxml"));
+        window = stage ;
+        Parent root = FXMLLoader.load(getClass().getResource("load.fxml"));
         Scene scene = new Scene(root);
-        stage.getIcons().add(new Image(getClass().getResourceAsStream("resources/Icon.png")));
-        stage.setTitle("IUT Stage");
-        stage.setScene(scene);
-        stage.setResizable(false);
-        stage.show();
+        window.getIcons().add(new Image(getClass().getResourceAsStream("resources/Icon.png")));
+        window.setTitle("IUT Stage");
+        window.setScene(scene);
+        window.setResizable(false);
+        window.show();
+        changeSceneDelay("step1.fxml");
 
     }
+    public void changeSceneDelay(String fxmlName) throws IOException, InterruptedException {
+
+        Parent root = FXMLLoader.load(getClass().getResource(fxmlName));
+        Scene scene = new Scene(root);
+        window.setScene(scene);
+    }
+
 
 }

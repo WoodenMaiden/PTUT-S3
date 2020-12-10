@@ -14,6 +14,7 @@ public class GenerateurHtml {
     GenerateurHtml(String strSortie,String date) throws IOException { //Constructeur
         codeHtml="";
         html = new File(strSortie);
+        if (html.exists())html.delete();
         GenerateurCss.css(); // Genere le string script avec le code css
         if (html.createNewFile()) {
             System.out.println("Fichier HTML créé !"); //Création de la première partie de l'html dans DebutHtml

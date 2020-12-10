@@ -1,64 +1,82 @@
 package fr.univ_amu.DumbStages;
 
-
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.image.Image;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.input.DragEvent;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
 import javafx.stage.FileChooser;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.Window;
-import org.apache.commons.compress.compressors.FileNameUtil;
+import javafx.stage.StageStyle;
 
 import java.awt.*;
 import java.io.File;
-import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.List;
 
-public class SceneControler {
+public class Step2Controler {
 
     static File excel ;
     static String path ;
-
-    @FXML
-    private Label textid;
+    public Stage dialog;
 
     @FXML
     private VBox box;
 
     @FXML
-    private Button btnFolder;
-
-    @FXML
     private ImageView drop;
 
     @FXML
-    private ImageView logo;
-
-
+    private Label textid;
 
     @FXML
-    static void animateLogo(){
+    private Button btnFolder;
+
+    @FXML
+    private Button btnValider;
+
+    @FXML
+    private Pane step2;
+
+    @FXML
+    private ImageView arrow;
+
+    @FXML
+    void goStep1(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("step1.fxml"));
+        Scene scene = new Scene(root);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+    }
+
+    @FXML
+    void handleDragDone(DragEvent event) {
 
     }
 
     @FXML
-    private void handleDragDone(DragEvent event) {
-
-    }
-
-    @FXML
-    void handleDragDropped(DragEvent event) throws FileNotFoundException {
+    void handleDragDropped(DragEvent event) {
         List<File> files = event.getDragboard().getFiles();
         excel = files.get(0);
         path = excel.getAbsolutePath();
         this.textid.setText(path);
+    }
+
+    @FXML
+    void handleDragExit(DragEvent event) {
+        drop.setImage(new Image(getClass().getResourceAsStream("resources/Download.png")));
     }
 
     @FXML
@@ -68,11 +86,6 @@ public class SceneControler {
             drop.setImage(new Image(getClass().getResourceAsStream("resources/DownloadHover.png")));
         }
         else
-            drop.setImage(new Image(getClass().getResourceAsStream("resources/Download.png")));
-    }
-
-    @FXML
-    void handleDragExit(DragEvent event) {
             drop.setImage(new Image(getClass().getResourceAsStream("resources/Download.png")));
     }
 
@@ -90,15 +103,8 @@ public class SceneControler {
     }
 
     @FXML
-    void handleValiderAction(ActionEvent event) {
-        String str = excel.getName();
-        String strExtension = str.substring(str.indexOf('.'));
-        if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
-            textid.setText("Fichier accepté");
-            LecteurExcel.start();
-        }
-        else
-            textid.setText("Fichier invalide");
+    void handleValiderAction(ActionEvent event) throws AWTException {
     }
+
 
 }

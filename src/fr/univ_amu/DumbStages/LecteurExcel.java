@@ -3,7 +3,6 @@ package fr.univ_amu.DumbStages;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.Scanner;
 import java.util.Vector;
 
 import fr.univ_amu.DumbStages.donnees.Entreprise;
@@ -54,14 +53,14 @@ public class LecteurExcel {
 
             System.out.println("Fichier en cours d'accés");
             String desktopPath = ""; // Variable chemin du bureau
-            LecteurExcel excelALire = new LecteurExcel(SceneControler.path);
+            LecteurExcel excelALire = new LecteurExcel(Step1Controler.path);
             System.out.println("Fichier d'entrée accédé !");
 
             FileSystemView fsv = FileSystemView.getFileSystemView(); // Recuperation du chemin du bureau
             File desktopFile = fsv.getHomeDirectory();
 
             desktopPath = desktopFile.getAbsolutePath(); // Ajout du chemin dans la variable fait pour
-            String desktopPathHtml = desktopPath + "\\index.html";
+            String desktopPathHtml = desktopPath + "\\Forum_Stage.html";
             XSSFWorkbook fichier = excelALire.getFichier();
 
             XSSFSheet mySheet = fichier.getSheetAt(0);
