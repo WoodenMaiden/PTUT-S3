@@ -229,6 +229,9 @@ public class GenerateurEdt {
                         else if (cetteCellule.getCellType() != CellType.NUMERIC){
                             mat[maty][matx] = -1;
                         }
+                        else if (cetteCellule.getNumericCellValue() < - 128 || cetteCellule.getNumericCellValue() > 127){
+                            mat[maty][matx] = -1;
+                        }
                         else {
                             String val = cetteCellule.getRawValue();
                             Scanner sc = new Scanner(val);

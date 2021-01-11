@@ -23,15 +23,9 @@ public class App extends Application{
         window.setScene(scene);
         window.setResizable(false);
         window.show();
-        //changeSceneDelay("step1.fxml");
-
-    }
-    public void changeSceneDelay(String fxmlName) throws IOException, InterruptedException {
-
-        Parent root = FXMLLoader.load(getClass().getResource(fxmlName));
-        Scene scene = new Scene(root);
-        window.setScene(scene);
     }
 
-
+    public static void main(String[] args) {
+        launch(args);
+    }
 }
