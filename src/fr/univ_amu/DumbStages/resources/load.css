@@ -1,0 +1,11 @@
+
+#startButton:hover{
+    -fx-background-color: #353467;
+    -fx-cursor: hand;
+}
+
+#startButton{
+    -fx-background-color: #15123b;
+    -fx-background-radius: 20px;
+    -fx-text-fill: white;
+}

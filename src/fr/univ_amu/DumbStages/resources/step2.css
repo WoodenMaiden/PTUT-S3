@@ -1,0 +1,73 @@
+
+
+.button{
+    -fx-background-color: white;
+    -fx-border-color: #bb1231 ;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #bb1231;
+
+}
+#numberBox{
+    -fx-background-color: white;
+    -fx-border-color: #bb1231 ;
+    -fx-border-width: 1.5px;
+    -fx-border-radius: 10px;
+    -fx-text-fill: #bb1231;
+
+}
+#btnValider{
+    -fx-border-color: #bb1231 ;
+    -fx-border-radius: 10px;
+    -fx-background-color: #bb1231;
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+}
+#btnValider:hover{
+    -fx-border-color: #ef2d51 ;
+    -fx-border-radius: 10px;
+    -fx-background-color: #ef2d51   ;
+    -fx-background-radius: 10px;
+    -fx-text-fill: white;
+}
+
+.button:hover{
+    -fx-background-color: #bb1231;
+    -fx-border-radius: 10px;
+    -fx-text-fill: white;
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-font-family: "Microsoft JhengHei";
+
+
+}
+
+#shadowBox{
+    -fx-background-color: white;
+        -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0)
+}
+#step1:hover{
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-translate-x: -3px;
+
+}
+
+#step3:hover{
+    -fx-background-radius: 10px;
+    -fx-cursor: hand;
+    -fx-translate-x: 3px;
+
+}
+#numberBox:hover{
+    -fx-cursor: hand;
+}
+#logo{
+    -webkit-animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    animation: slide-in-bck-center 0.7s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+    
+}
+.label{
+    -fx-text-fill: #bb1231;
+}

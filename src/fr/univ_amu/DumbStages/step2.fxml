@@ -6,11 +6,11 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<VBox fx:id="box" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffffff;" stylesheets="@resources/scene.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univ_amu.DumbStages.Step2Controler">
+<VBox fx:id="box" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffffff;" stylesheets="@resources/step2.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univ_amu.DumbStages.Step2Controler">
    <children>
       <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="17.0" prefWidth="69.0" text="ETAPE 2" textFill="#15123b">
+            <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" text="ETAPE 2  " textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="15.0" />
                </font>
@@ -20,7 +20,7 @@
             </Label>
             <ImageView fitHeight="30.0" fitWidth="112.0">
                <image>
-                  <Image url="@resources/IUTStage.PNG" />
+                  <Image url="@resources/IUTStage2.png" />
                </image>
                <HBox.margin>
                   <Insets left="370.0" top="10.0" />
@@ -30,54 +30,72 @@
       </HBox>
       <Pane prefHeight="302.0" prefWidth="600.0">
          <children>
-            <StackPane layoutX="147.0" prefHeight="150.0" prefWidth="200.0">
+            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="28.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="247.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0); -fx-background-radius: 10px;">
                <children>
-                  <ImageView fx:id="drop" fitHeight="235.0" fitWidth="307.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver">
-                     <image>
-                        <Image url="@resources/Download.png" />
-                     </image>
-                     <StackPane.margin>
-                        <Insets top="30.0" />
-                     </StackPane.margin>
-                  </ImageView>
-                  <Label fx:id="textid" text="Glisser le fichier excel" textAlignment="CENTER" textFill="#15123b">
+                  <Label fx:id="textid" text="Glisser le fichier excel" textAlignment="CENTER" textFill="#cd1637">
                      <font>
                         <Font name="Microsoft JhengHei" size="12.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets top="70.0" />
+                        <Insets bottom="15.0" />
                      </StackPane.margin>
+                     <padding>
+                        <Insets right="25.0" />
+                     </padding>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="217.0" prefWidth="600.0" spacing="20.0">
+                  <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="147.0">
                      <children>
-                        <Button fx:id="btnFolder" mnemonicParsing="false" onAction="#handleFolderAction" text="Ouvrir" textFill="#15123b">
+                        <Label prefHeight="17.0" prefWidth="117.0" text="Nombres d'heures" textFill="#cd1637">
+                           <HBox.margin>
+                              <Insets top="6.0" />
+                           </HBox.margin></Label>
+                        <ChoiceBox fx:id="numberBox" prefHeight="29.0" prefWidth="56.0" />
+                     </children>
+                     <StackPane.margin>
+                        <Insets top="50.0" />
+                     </StackPane.margin>
+                  </HBox>
+                  <HBox alignment="CENTER" prefHeight="102.0" prefWidth="290.0" spacing="10.0">
+                     <children>
+                        <Button fx:id="btnFolder" mnemonicParsing="false" onAction="#handleFolderAction" prefHeight="29.0" prefWidth="79.0" text="Ouvrir" textFill="#15123b">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
+                           <HBox.margin>
+                              <Insets />
+                           </HBox.margin>
                         </Button>
-                        <Button fx:id="btnValider" mnemonicParsing="false" text="Valider">
+                        <Button fx:id="btnValider" mnemonicParsing="false" onAction="#handleValiderAction" prefHeight="29.0" prefWidth="64.0" text="Valider">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Button>
                      </children>
                      <StackPane.margin>
-                        <Insets top="140.0" />
+                        <Insets top="150.0" />
                      </StackPane.margin>
                   </HBox>
+                  <ImageView fx:id="drop" fitHeight="62.0" fitWidth="59.0" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/Download2.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets bottom="125.0" />
+                     </StackPane.margin>
+                  </ImageView>
                </children>
             </StackPane>
             <Pane fx:id="step3" layoutX="510.0" layoutY="115.0" prefHeight="73.0" prefWidth="69.0">
                <children>
                   <ImageView fx:id="arrow" fitHeight="23.0" fitWidth="23.0" layoutX="22.0" layoutY="15.0" pickOnBounds="true">
                      <image>
-                        <Image url="@resources/Arrow.png" />
+                        <Image url="@resources/RedArrow.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="12.0" layoutY="47.0" text="ETAPE 3">
+                  <Label layoutX="12.0" layoutY="47.0" text="ETAPE 3" textFill="#cd1637">
                      <font>
                         <Font name="Microsoft JhengHei" size="12.0" />
                      </font>
@@ -88,10 +106,10 @@
                <children>
                   <ImageView fx:id="arrow1" fitHeight="23.0" fitWidth="23.0" layoutX="22.0" layoutY="15.0" pickOnBounds="true" rotate="180.0">
                      <image>
-                        <Image url="@resources/Arrow.png" />
+                        <Image url="@resources/RedArrow.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="12.0" layoutY="47.0" text="ETAPE 1">
+                  <Label layoutX="12.0" layoutY="47.0" text="ETAPE 1" textFill="#cd1637">
                      <font>
                         <Font name="Microsoft JhengHei" size="12.0" />
                      </font>

@@ -14,6 +14,7 @@ package fr.univ_amu.DumbStages;
         import javafx.scene.input.MouseEvent;
         import javafx.scene.input.TransferMode;
         import javafx.scene.layout.Pane;
+        import javafx.scene.layout.StackPane;
         import javafx.scene.layout.VBox;
         import javafx.stage.FileChooser;
         import javafx.stage.Modality;
@@ -48,6 +49,9 @@ public class Step1Controler {
 
     @FXML
     private Pane step2;
+
+    @FXML
+    private StackPane shadowBox;
 
     @FXML
     private ImageView arrow;
@@ -111,8 +115,6 @@ public class Step1Controler {
             LecteurExcel.start();
             if (SystemTray.isSupported())
                 displayProcessFinishWindow();
-            else
-                displayProcessFinish();
         }
         else
             textid.setText("Fichier invalide");
@@ -134,19 +136,6 @@ public class Step1Controler {
         tray.add(trayIcon);
         trayIcon.displayMessage("Les fichiers ont été générés sur le bureau", "Forum_Stage.html et Tableau_Etudiant_Entreprises.xls", TrayIcon.MessageType.NONE);
         tray.remove(trayIcon);
-    }
-
-    public void displayProcessFinish() throws IOException {
-        dialog = new Stage();
-        Parent root = FXMLLoader.load(getClass().getResource("alert.fxml"));
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.initOwner(null);
-        dialog.initStyle(StageStyle.UTILITY);
-        Scene dialogScene = new Scene(root);
-        dialog.setScene(dialogScene);
-        dialog.centerOnScreen();
-        dialog.show();
-
     }
 
 

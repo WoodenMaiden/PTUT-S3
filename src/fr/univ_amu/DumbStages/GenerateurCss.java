@@ -35,11 +35,13 @@ public class GenerateurCss {
                     "    width: 100%;\n" +
                     "    background-color: white;\n" +
                     "    border: 0px;\n" +
-                    "    border-top: 0px;\n" +
                     "    border-bottom: 1px;\n" +
                     "    border-style: solid;\n" +
                     "    justify-content: space-between;\n" +
                     "    border-color: rgba(19, 22, 62, 0.110);\n" +
+                    "    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    "    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    "     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
                     "}\n" +
                     "\n" +
                     "h1 {\n" +
@@ -135,9 +137,18 @@ public class GenerateurCss {
                     "    justify-content: center;\n" +
                     "}\n" +
                     "\n" +
+                    "tbody {\n" +
+                    "    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    "    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    "     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    "}\n" +
+                    "\n" +
                     "footer {\n" +
                     "    position: absolute;\n" +
                     "    width: 100%;\n" +
+                    "    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    "    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    "     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
                     "    height: 50px;\n" +
                     "    display: flex;\n" +
                     "    justify-content: space-between;\n" +
@@ -150,6 +161,7 @@ public class GenerateurCss {
                     "    border-color: rgba(19, 22, 62, 0.110);\n" +
                     "}\n" +
                     "\n" +
+
                     "p {\n" +
                     "    margin-left: 5%;\n" +
                     "    margin-right: 5%;\n" +

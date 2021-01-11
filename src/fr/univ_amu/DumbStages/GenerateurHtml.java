@@ -5,7 +5,7 @@ import fr.univ_amu.DumbStages.donnees.*;
 import java.awt.*;
 import java.io.*;
 
-public class GenerateurHtml {
+public class    GenerateurHtml {
     private File html;
     private String finHtml;
     private String codeHtml;
@@ -87,7 +87,8 @@ public class GenerateurHtml {
                 "        <tr>\n" +
                 "          <th id=\"thLeft\"> Nom Entreprise </th>\n" +
                 "          <th> Repr&eacute;sentant Entreprise </th>\n" +
-                "          <th id=\"thRight\"> Lien Web Entreprise </th>";
+                "          <th> Lien Web Entreprise </th>\n" +
+                "          <th id=\"thRight\"> Zoom </th>";
     } //Insert dans codeHtml le début du tableau en html
 
     public void finTableau () {
@@ -98,8 +99,9 @@ public class GenerateurHtml {
         codeHtml = codeHtml + "    <tr>\n" +
                 "        <td> "+uneEntreprise.getNom_en()+"</td> <td>";
         for (String rep : uneEntreprise.getRepresentants())
-            codeHtml = codeHtml + rep +"</br>";
-        codeHtml = codeHtml + "</td><td><a href=\""+uneEntreprise.getUrl()+"\">"+uneEntreprise.getNom_en()+"</a></td>\n</tr>";
+            this.codeHtml = this.codeHtml + rep +"</br>";
+        this.codeHtml = this.codeHtml + "</td><td><a href=\""+uneEntreprise.getUrl()+"\">"+uneEntreprise.getNom_en()+"</a></td>" +
+                "<td><a href="+uneEntreprise.getLienZoom()+"> </a> </br> Mot de passe: "+uneEntreprise.getMdpZoom()+"</td>\n</tr>";
     }//Insert dans CodeHtml une ligne du tableau contenant le nom de l'entreprise, des représentants, ainsi que l'url de leur site
 
     public void setFinHtml() {
