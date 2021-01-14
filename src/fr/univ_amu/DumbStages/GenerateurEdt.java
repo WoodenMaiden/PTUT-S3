@@ -1,6 +1,7 @@
 package fr.univ_amu.DumbStages;
 
 
+import com.sun.javafx.fxml.expression.Expression;
 import fr.univ_amu.DumbStages.donnees.Entreprise;
 import fr.univ_amu.DumbStages.donnees.Etudiant;
 import org.apache.poi.openxml4j.exceptions.InvalidFormatException;
@@ -36,7 +37,6 @@ public class GenerateurEdt {
         if (chemin == null || chemin == "") throw new SecurityException("entrez quelque chose");
 
         try {
-            System.out.println(nombreHoraires);
             mesEntreprises = new Vector<Entreprise>();
             mesEtudiants = new Vector<Etudiant>();
 
@@ -276,210 +276,212 @@ public class GenerateurEdt {
         ///////////////////////////////////////
 
 
-        XSSFWorkbook ExcelEntreprises = new XSSFWorkbook();
-        File EDTentreprises = new File(RepertSortie, "Emploi du temps entreprises.xlsx");
+            XSSFWorkbook ExcelEntreprises = new XSSFWorkbook();
+            File EDTentreprises = new File(RepertSortie, "Emploi du temps entreprises.xlsx");
 
 
-        XSSFCellStyle texte = ExcelEntreprises.createCellStyle();
-        texte.setVerticalAlignment(VerticalAlignment.CENTER);
-        texte.setAlignment(HorizontalAlignment.CENTER);
+            XSSFCellStyle texte = ExcelEntreprises.createCellStyle();
+            texte.setVerticalAlignment(VerticalAlignment.CENTER);
+            texte.setAlignment(HorizontalAlignment.CENTER);
 
 
-        XSSFCellStyle titres = ExcelEntreprises.createCellStyle();
-        titres.cloneStyleFrom(texte);
-        titres.setBorderBottom(BorderStyle.THICK);
-        titres.setBorderTop(BorderStyle.THICK);
+            XSSFCellStyle titres = ExcelEntreprises.createCellStyle();
+            titres.cloneStyleFrom(texte);
+            titres.setBorderBottom(BorderStyle.THICK);
+            titres.setBorderTop(BorderStyle.THICK);
 
-        XSSFCellStyle dernieresCellules = ExcelEntreprises.createCellStyle();
-        dernieresCellules.cloneStyleFrom(texte);
-        dernieresCellules.setBorderBottom(BorderStyle.THICK);
-
-
-        XSSFSheet maFeuille = ExcelEntreprises.createSheet("Entreprises");
-        XSSFRow mesHoraires = maFeuille.createRow(0);
-
-        XSSFCell A1 = mesHoraires.createCell(0);
-        A1.setCellValue("Entreprises");
-        A1.setCellStyle(titres);
+            XSSFCellStyle dernieresCellules = ExcelEntreprises.createCellStyle();
+            dernieresCellules.cloneStyleFrom(texte);
+            dernieresCellules.setBorderBottom(BorderStyle.THICK);
 
 
-        for (int h = 1; h < this.nombreHoraires +1; ++h) {
+            XSSFSheet maFeuille = ExcelEntreprises.createSheet("Entreprises");
+            XSSFRow mesHoraires = maFeuille.createRow(0);
 
-            XSSFCell c = mesHoraires.createCell(h);
-            c.setCellStyle(titres);
-            c.setCellValue("insérer une horaire");
-            c.getSheet().autoSizeColumn(c.getColumnIndex());
-        }
-
-        // On a h horaires, de v places chacun, y entreprises, x élèves pouvant assister z fois (maximum h horaires)
-        // on doit respecter : nb_places_totales ≥ nb_etudiants * nb_horaires
-        // ∀ h,y,x ∈ N \ {0}, z ∈ N / z ∈ ]0,5]
-        // h*v*y ≥ x*z
+            XSSFCell A1 = mesHoraires.createCell(0);
+            A1.setCellValue("Entreprises");
+            A1.setCellStyle(titres);
 
 
-        int nb_places_necessaires = 7;
-        int nb_entretiens_et = this.nombreHoraires;
+            for (int h = 1; h < this.nombreHoraires +1; ++h) {
 
-        while (true) {
-
-            if (this.nombreHoraires * nb_places_necessaires * mesEntreprises.size() >= mesEtudiants.size() * nb_entretiens_et) {
-
-                break;
-            } else if (nb_entretiens_et <= 3) {
-
-                ++nb_places_necessaires;
-            } else {
-
-                --nb_entretiens_et;
+                XSSFCell c = mesHoraires.createCell(h);
+                c.setCellStyle(titres);
+                c.setCellValue("insérer une horaire");
+                c.getSheet().autoSizeColumn(c.getColumnIndex());
             }
-        }
+
+            // On a h horaires, de v places chacun, y entreprises, x élèves pouvant assister z fois (maximum h horaires)
+            // on doit respecter : nb_places_totales ≥ nb_etudiants * nb_horaires
+            // ∀ h,y,x ∈ N \ {0}, z ∈ N / z ∈ ]0,5]
+            // h*v*y ≥ x*z
 
 
-        Vector<CellRangeAddress> mesCellulesFusionnees = new Vector<CellRangeAddress>(); // représente les entreprises en ordonnées (leur range)
+            int nb_places_necessaires = 7;
+            int nb_entretiens_et = this.nombreHoraires;
 
+            while (true) {
 
-        //fusion des cellules
+                if (this.nombreHoraires * nb_places_necessaires * mesEntreprises.size() >= mesEtudiants.size() * nb_entretiens_et) {
 
-        int debut_fusion_cellules = -nb_places_necessaires + 1;
-        for (int i = 0; i < mesEntreprises.size(); ++i) {
+                    break;
+                } else if (nb_entretiens_et <= 3) {
 
-            debut_fusion_cellules += nb_places_necessaires;
+                    ++nb_places_necessaires;
+                } else {
 
-            CellRangeAddress maRange = new CellRangeAddress(debut_fusion_cellules, debut_fusion_cellules + nb_places_necessaires - 1, 0, 0);
-
-            mesCellulesFusionnees.add(maRange);
-
-            maFeuille.addMergedRegion(maRange);
-        }
-
-
-        // TODO changer normaliser de manière a homogéniser la matrice de choix (éviter qu'une entreprise aie tous les 1)
-
-        // ici on remplit le tableau, on va d'abord faire une copie de la matrice de choix
-
-        Vector<Vector<Byte>> matrice2 = new Vector<Vector<Byte>>();
-        for (byte[] ligne : matrice_de_choix) {
-
-            Vector<Byte> Vligne = new Vector<Byte>();
-            for (byte b : ligne)
-                Vligne.add(b);
-
-            matrice2.add(Vligne);
-        }
-
-        Random aleaEtu = new Random();
-        boolean estFini = false;
-
-
-        //créons TOUTES les cellules
-        int indexEntreprises = 0;
-        for (int i = 1; i < mesEntreprises.size() * nb_places_necessaires; ++i) {
-            XSSFRow rowDeRemplissage = maFeuille.createRow(i);
-            for (int j = 0; j < this.nombreHoraires + 1; ++j) {
-                if (j == 0) {
-                    XSSFCell cellule_fusionee = rowDeRemplissage.createCell(0);
-                    if (i % nb_places_necessaires == 0) ++indexEntreprises;
-                    cellule_fusionee.setCellValue(mesEntreprises.get(indexEntreprises).getNom_en());
-
-                    cellule_fusionee.setCellStyle(titres);
-                    cellule_fusionee.getSheet().autoSizeColumn(cellule_fusionee.getColumnIndex());
-                    continue;
-                }
-                XSSFCell cellDeRemplissage = rowDeRemplissage.createCell(j);
-                cellDeRemplissage.setCellValue(" ");
-                cellDeRemplissage.setCellStyle(texte);
-                if (i % nb_places_necessaires == 0) cellDeRemplissage.setCellStyle(dernieresCellules);
-                cellDeRemplissage.getSheet().autoSizeColumn(cellDeRemplissage.getColumnIndex());
-            }
-        }
-
-
-        //Ici on va consommer les lignes du vecteur matriciel matrice2 une par une de manière aléatoire (lignes qui représentent les étudiants), pour chaque ligne on va placer les étudiants dans l'ordre des notes
-        // attention les yeux ça risque de piquer
-        while (estFini == false) {
-
-            //pour chaque étudiant
-            // "démonstration par l'absurde" : ici on va partir du principe que estFini est vrai
-            estFini = true;
-            for (Vector<Byte> v : matrice2) {
-                if (v.size() != 0) {
-                    estFini = false;
+                    --nb_entretiens_et;
                 }
             }
 
-            if (estFini == true) break;
 
-            // on sélectionne un étudiant
-            int iy_matrice = aleaEtu.nextInt(matrice2.size());
+            Vector<CellRangeAddress> mesCellulesFusionnees = new Vector<CellRangeAddress>(); // représente les entreprises en ordonnées (leur range)
 
-            while (matrice2.get(iy_matrice).size() == 0) {
-                iy_matrice = aleaEtu.nextInt(matrice2.size());
+
+            //fusion des cellules
+
+            int debut_fusion_cellules = -nb_places_necessaires + 1;
+            for (int i = 0; i < mesEntreprises.size(); ++i) {
+
+                debut_fusion_cellules += nb_places_necessaires;
+
+                CellRangeAddress maRange = new CellRangeAddress(debut_fusion_cellules, debut_fusion_cellules + nb_places_necessaires - 1, 0, 0);
+
+                mesCellulesFusionnees.add(maRange);
+
+                maFeuille.addMergedRegion(maRange);
             }
 
-            Vector<Byte> Lmatrice2 = matrice2.get(iy_matrice);
 
-            byte noteSelect = 1;
+            // TODO changer normaliser de manière a homogéniser la matrice de choix (éviter qu'une entreprise aie tous les 1)
+
+            // ici on remplit le tableau, on va d'abord faire une copie de la matrice de choix
+
+            Vector<Vector<Byte>> matrice2 = new Vector<Vector<Byte>>();
+            for (byte[] ligne : matrice_de_choix) {
+
+                Vector<Byte> Vligne = new Vector<Byte>();
+                for (byte b : ligne)
+                    Vligne.add(b);
+
+                matrice2.add(Vligne);
+            }
+
+            Random aleaEtu = new Random();
+            boolean estFini = false;
 
 
-            //pour chaque note <=> pour chaque entreprise
-            while (noteSelect < nb_entretiens_et + 1) {
+            //créons TOUTES les cellules
+            int indexEntreprises = 0;
+            for (int i = 1; i < mesEntreprises.size() * nb_places_necessaires; ++i) {
+                XSSFRow rowDeRemplissage = maFeuille.createRow(i);
+                for (int j = 0; j < this.nombreHoraires + 1; ++j) {
+                    if (j == 0) {
+                        XSSFCell cellule_fusionee = rowDeRemplissage.createCell(0);
+                        if (i % nb_places_necessaires == 0) ++indexEntreprises;
+                        cellule_fusionee.setCellValue(mesEntreprises.get(indexEntreprises).getNom_en());
+
+                        cellule_fusionee.setCellStyle(titres);
+                        cellule_fusionee.getSheet().autoSizeColumn(cellule_fusionee.getColumnIndex());
+                        continue;
+                    }
+                    XSSFCell cellDeRemplissage = rowDeRemplissage.createCell(j);
+                    cellDeRemplissage.setCellValue(" ");
+                    cellDeRemplissage.setCellStyle(texte);
+                    if (i % nb_places_necessaires == 0) cellDeRemplissage.setCellStyle(dernieresCellules);
+                    cellDeRemplissage.getSheet().autoSizeColumn(cellDeRemplissage.getColumnIndex());
+                }
+            }
 
 
-                int parcours_vecteur = 0;
+            //Ici on va consommer les lignes du vecteur matriciel matrice2 une par une de manière aléatoire (lignes qui représentent les étudiants), pour chaque ligne on va placer les étudiants dans l'ordre des notes
+            // attention les yeux ça risque de piquer
+            while (estFini == false) {
 
-                //pour toutes les cases du vecteur associé à la clé iy_matrice (mesEtudiants.get(iy_matrice))...
-                while (parcours_vecteur < map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice)).length) {
+                //pour chaque étudiant
+                // "démonstration par l'absurde" : ici on va partir du principe que estFini est vrai
+                estFini = true;
+                for (Vector<Byte> v : matrice2) {
+                    if (v.size() != 0) {
+                        estFini = false;
+                    }
+                }
 
-                    int entreprise_associee = Lmatrice2.indexOf(noteSelect);
+                if (estFini == true) break;
 
-                    // ..on regarde si l'étudiant est placé dans la colonne du excel parcours_vecteur+1...
-                    if (map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] == false && map_Etudiant_Entreprises_Libres.get(mesEtudiants.get(iy_matrice))[entreprise_associee] == false) {
+                // on sélectionne un étudiant
+                int iy_matrice = aleaEtu.nextInt(matrice2.size());
 
-                        // on reste dans l'espace dédié à l'entreprise en se calant sur la première ligne
-                        int y = mesCellulesFusionnees.get(entreprise_associee).getFirstRow();
+                while (matrice2.get(iy_matrice).size() == 0) {
+                    iy_matrice = aleaEtu.nextInt(matrice2.size());
+                }
 
-                        // on parcoure les lignes (les places) dédiées à l'entreprise
-                        while (y <= mesCellulesFusionnees.get(entreprise_associee).getLastRow()) {
+                Vector<Byte> Lmatrice2 = matrice2.get(iy_matrice);
 
-                            //si la cellule testée est vide (elle ne peux pas être null car on les as toutes instanciées
+                byte noteSelect = 1;
 
-                            if (maFeuille.getRow(y).getCell(parcours_vecteur + 1).getStringCellValue().isEmpty()
-                                    || maFeuille.getRow(y).getCell(parcours_vecteur + 1).getStringCellValue().isBlank()){
 
-                                maFeuille.getRow(y).getCell(parcours_vecteur + 1).setCellValue(mesEtudiants.get(iy_matrice).getNom() + " " + mesEtudiants.get(iy_matrice).getPrenom());
+                //pour chaque note <=> pour chaque entreprise
+                while (noteSelect < nb_entretiens_et + 1) {
 
-                                map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] = true;
-                                map_Etudiant_Entreprises_Libres.get(mesEtudiants.get(iy_matrice))[entreprise_associee] = true;
+
+                    int parcours_vecteur = 0;
+
+                    //pour toutes les cases du vecteur associé à la clé iy_matrice (mesEtudiants.get(iy_matrice))...
+                    while (parcours_vecteur < map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice)).length){
+
+
+                        int entreprise_associee = Lmatrice2.indexOf(noteSelect);
+
+                        // ..on regarde si l'étudiant est placé dans la colonne du excel parcours_vecteur+1...
+
+                        if (map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] == false && map_Etudiant_Entreprises_Libres.get(mesEtudiants.get(iy_matrice))[entreprise_associee] == false) {
+
+                            // on reste dans l'espace dédié à l'entreprise en se calant sur la première ligne
+                            int y = mesCellulesFusionnees.get(entreprise_associee).getFirstRow();
+
+                            // on parcoure les lignes (les places) dédiées à l'entreprise
+                            while (y <= mesCellulesFusionnees.get(entreprise_associee).getLastRow()) {
+
+                                //si la cellule testée est vide (elle ne peux pas être null car on les as toutes instanciées
+                                if (maFeuille.getRow(y) != null) {
+                                    if (maFeuille.getRow(y).getCell(parcours_vecteur + 1).getStringCellValue().isEmpty()
+                                            || maFeuille.getRow(y).getCell(parcours_vecteur + 1).getStringCellValue().isBlank()) {
+
+                                        maFeuille.getRow(y).getCell(parcours_vecteur + 1).setCellValue(mesEtudiants.get(iy_matrice).getNom() + " " + mesEtudiants.get(iy_matrice).getPrenom());
+
+                                        map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] = true;
+                                        map_Etudiant_Entreprises_Libres.get(mesEtudiants.get(iy_matrice))[entreprise_associee] = true;
+                                    }
+                                }
+                                //si l'étudiant a déjà été placé dans cette colonne et a déjà été placé avec son entreprise on sort de cette boucle
+                                if (map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] == true && map_Etudiant_Entreprises_Libres.get(mesEtudiants.get(iy_matrice))[entreprise_associee] == true){
+                                    break;
+                                }
+
+                                ++y;
                             }
 
-                            //si l'étudiant a déjà été placé dans cette colonne et a déjà été placé avec son entreprise on sort de cette boucle
-                            if (map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] == true && map_Etudiant_Entreprises_Libres.get(mesEtudiants.get(iy_matrice))[entreprise_associee] == true){
-                                break;
-                            }
+                        } // if (map_Etudiant_ColomnesLibres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] == false)
 
-                            ++y;
-                        }
+                          ++parcours_vecteur;
+                          ++noteSelect;
+                          Lmatrice2.set(entreprise_associee, (byte) 0);
 
-                    } // if (map_Etudiant_ColomnesLibres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] == false)
-
-                    ++parcours_vecteur;
-                    ++noteSelect;
-                    Lmatrice2.set(entreprise_associee, (byte) 0);
-
-                } // while (parcours_vecteur < map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice)).length)
+                    } // while (parcours_vecteur < map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice)).length)
 
 
-            }//while (noteSelect < nb_entretiens_et + 1)
+                }//while (noteSelect < nb_entretiens_et + 1)
 
-            // on supprime la ligne de l'étudiant -> on s'est occupé de cet étudiant
-            Lmatrice2.clear();
+                // on supprime la ligne de l'étudiant -> on s'est occupé de cet étudiant
+                Lmatrice2.clear();
 
-        }// while(estFini == true)
+            }// while(estFini == true)
 
-        //Todo créer l'edt inversé pour chaque étudiant
+            //Todo créer l'edt inversé pour chaque étudiant
 
 
-        matrice2.clear();
+            matrice2.clear();
 
 
         //////////////////////////////////////////////
@@ -492,63 +494,63 @@ public class GenerateurEdt {
         // création de l'edt des étudiants //
         /////////////////////////////////////
 
-        XSSFSheet feuille_et = ExcelEntreprises.createSheet("Etudiants");
+            XSSFSheet feuille_et = ExcelEntreprises.createSheet("Etudiants");
 
-        //on fait le header
-        XSSFRow mesHoraires_et = feuille_et.createRow(0);
-        XSSFCell A1_et = mesHoraires_et.createCell(0);
-        A1_et.setCellValue("Étudiants");
-        A1_et.setCellStyle(titres);
+            //on fait le header
+            XSSFRow mesHoraires_et = feuille_et.createRow(0);
+            XSSFCell A1_et = mesHoraires_et.createCell(0);
+            A1_et.setCellValue("Étudiants");
+            A1_et.setCellStyle(titres);
 
-        for (int h = 1 ; h < this.nombreHoraires + 1; ++h){
-            XSSFCell horaire = mesHoraires_et.createCell(h);
-            CellAddress AdresseHoraire = new CellAddress(maFeuille.getRow(0).getCell(h));
-            horaire.setCellFormula("REPT(" + maFeuille.getSheetName() + "!" + AdresseHoraire.toString() + ", 1)" );
-            horaire.setCellStyle(titres);
-        }
-
-
-        // on va créer toutes les cellules
-        for (int et = 1; et < mesEtudiants.size() + 1; ++et){
-            XSSFRow maRow = feuille_et.createRow(et);
-            for (int i_maCell = 0; i_maCell < this.nombreHoraires +1; ++i_maCell){
-                XSSFCell maCell = maRow.createCell(i_maCell);
-                maCell.setCellStyle(texte);
+            for (int h = 1 ; h < this.nombreHoraires + 1; ++h){
+                XSSFCell horaire = mesHoraires_et.createCell(h);
+                CellAddress AdresseHoraire = new CellAddress(maFeuille.getRow(0).getCell(h));
+                horaire.setCellFormula("REPT(" + maFeuille.getSheetName() + "!" + AdresseHoraire.toString() + ", 1)" );
+                horaire.setCellStyle(titres);
             }
-        }
 
-        // on va mettre les noms de nos étudiants
-        for(Row R : feuille_et){
-            if (R.getRowNum() == 0) continue;
-            R.getCell(0).setCellValue(mesEtudiants.get(R.getRowNum() - 1).getNom() + " " + mesEtudiants.get(R.getRowNum() - 1).getPrenom());
-            R.getSheet().autoSizeColumn(0);
 
-            //On regarde les changements de groupes tout en faisant gaffe à ne pas finir en dehors de l'array
-
-            if ((R.getRowNum() <= (feuille_et.getLastRowNum() - 1)) && !(mesEtudiants.get(R.getRowNum() - 1).getGroupe().equals(mesEtudiants.get(R.getRowNum()).getGroupe()))){
-                for (Cell c : R){
-                    c.setCellStyle(dernieresCellules);
+            // on va créer toutes les cellules
+            for (int et = 1; et < mesEtudiants.size() + 1; ++et){
+                XSSFRow maRow = feuille_et.createRow(et);
+                for (int i_maCell = 0; i_maCell < this.nombreHoraires +1; ++i_maCell){
+                    XSSFCell maCell = maRow.createCell(i_maCell);
+                    maCell.setCellStyle(texte);
                 }
             }
-        }
 
-        for (int h = 1; h < this.nombreHoraires + 1; ++h) {
-            for (int y = 1; y < maFeuille.getLastRowNum(); ++y){
-                //si la cellule est vide on l'ignore
-                if (maFeuille.getRow(y).getCell(h).getStringCellValue().isEmpty() || maFeuille.getRow(y).getCell(h).getStringCellValue().isBlank()) continue;
+            // on va mettre les noms de nos étudiants
+            for(Row R : feuille_et){
+                if (R.getRowNum() == 0) continue;
+                R.getCell(0).setCellValue(mesEtudiants.get(R.getRowNum() - 1).getNom() + " " + mesEtudiants.get(R.getRowNum() - 1).getPrenom());
+                R.getSheet().autoSizeColumn(0);
 
-                String étudiant = maFeuille.getRow(y).getCell(h).getStringCellValue();
-                String entreprise = maFeuille.getRow(y).getCell(0).getStringCellValue();
+                //On regarde les changements de groupes tout en faisant gaffe à ne pas finir en dehors de l'array
 
-                int y2 = 1;
-                // on défile les ligns jusqu'à ce qu'on arrive à l'étudiant concerné
-                for (; y2 < feuille_et.getLastRowNum() && !(feuille_et.getRow(y2).getCell(0).getStringCellValue().equals(étudiant)); ++y2);
-
-                //et on place l'entreprise
-                feuille_et.getRow(y2).getCell(h).setCellValue(entreprise);
-
+                if ((R.getRowNum() <= (feuille_et.getLastRowNum() - 1)) && !(mesEtudiants.get(R.getRowNum() - 1).getGroupe().equals(mesEtudiants.get(R.getRowNum()).getGroupe()))){
+                    for (Cell c : R){
+                        c.setCellStyle(dernieresCellules);
+                    }
+                }
             }
-        }
+
+            for (int h = 1; h < this.nombreHoraires + 1; ++h) {
+                for (int y = 1; y < maFeuille.getLastRowNum(); ++y){
+                    //si la cellule est vide on l'ignore
+                    if (maFeuille.getRow(y).getCell(h).getStringCellValue().isEmpty() || maFeuille.getRow(y).getCell(h).getStringCellValue().isBlank()) continue;
+
+                    String étudiant = maFeuille.getRow(y).getCell(h).getStringCellValue();
+                    String entreprise = maFeuille.getRow(y).getCell(0).getStringCellValue();
+
+                    int y2 = 1;
+                    // on défile les ligns jusqu'à ce qu'on arrive à l'étudiant concerné
+                    for (; y2 < feuille_et.getLastRowNum() && !(feuille_et.getRow(y2).getCell(0).getStringCellValue().equals(étudiant)); ++y2);
+
+                    //et on place l'entreprise
+                    feuille_et.getRow(y2).getCell(h).setCellValue(entreprise);
+
+                }
+            }
 
 
 
