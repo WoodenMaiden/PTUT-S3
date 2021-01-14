@@ -3,6 +3,9 @@ package fr.univ_amu.DumbStages;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
 import java.util.Vector;
 
 import fr.univ_amu.DumbStages.donnees.Entreprise;
@@ -49,8 +52,6 @@ public class LecteurExcel {
 
         try {
 
-            // Entree D:\Entreprises PTUT.xlsx
-
             System.out.println("Fichier en cours d'accés");
             String desktopPath = ""; // Variable chemin du bureau
             LecteurExcel excelALire = new LecteurExcel(Step1Controler.path);
@@ -85,7 +86,9 @@ public class LecteurExcel {
                 }
             }
 
-            GenerateurHtml html = new GenerateurHtml(desktopPathHtml,"04/12/2020");
+            DateFormat format = new SimpleDateFormat("dd/MM/yyyy");
+            Calendar calendar = Calendar.getInstance();
+            GenerateurHtml html = new GenerateurHtml(desktopPathHtml,format.format(calendar.getTime()));
 
 
             // Sortie D:/Tableau_Etudiant_Entreprises.xls

@@ -39,7 +39,14 @@
     -fx-background-radius: 10px;
     -fx-cursor: hand;
     -fx-translate-x: 3px;
+}
 
+#close,#buttonClose,#infoImage:hover{
+    -fx-cursor: hand;
+}
+
+#home:hover {
+    -fx-cursor: hand;
 }
 
 #logo{
@@ -49,4 +56,9 @@
 }
 .label{
     -fx-text-fill: #15123b;
+}
+
+#infoBox{
+    -fx-background-radius: 10px;
+    -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0)
 }

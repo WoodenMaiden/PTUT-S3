@@ -24,8 +24,4 @@ public class App extends Application{
         window.setResizable(false);
         window.show();
     }
-
-    public static void main(String[] args) {
-        launch(args);
-    }
 }

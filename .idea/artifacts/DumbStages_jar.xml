@@ -1,0 +1,114 @@
+<component name="ArtifactManager">
+  <artifact type="jar" name="DumbStages:jar">
+    <output-path>$PROJECT_DIR$/out/artifacts/DumbStages_jar</output-path>
+    <root id="archive" name="DumbStages.jar">
+      <element id="module-output" name="DumbStages" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/junit-4.12.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/log4j-1.2.17.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/jaxb-api-2.3.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/jaxb-impl-2.3.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/activation-1.1.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/SparseBitSet-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/jaxb-core-2.3.0.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/commons-codec-1.13.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/commons-logging-1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/commons-math3-3.6.1.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/commons-compress-1.19.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/lib/commons-collections4-4.4.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/src.zip" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/javafx-swt.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/javafx.web.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/javafx.base.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/javafx.fxml.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/javafx.media.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/javafx.swing.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/javafx.controls.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/lib/javafx.graphics.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/poi-4.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/poi-ooxml-4.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/poi-examples-4.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/poi-excelant-4.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/poi-scratchpad-4.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/poi-ooxml-schemas-4.1.2.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/ooxml-lib/curvesapi-1.06.jar" path-in-jar="/" />
+      <element id="extracted-dir" path="$PROJECT_DIR$/src/POI/ooxml-lib/xmlbeans-3.1.0.jar" path-in-jar="/" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/poi-4.1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/poi-ooxml-4.1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/poi-examples-4.1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/poi-excelant-4.1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/poi-scratchpad-4.1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/poi-ooxml-schemas-4.1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/junit-4.12.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/log4j-1.2.17.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/jaxb-api-2.3.1.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/jaxb-impl-2.3.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/activation-1.1.1.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/SparseBitSet-1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/jaxb-core-2.3.0.1.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/commons-codec-1.13.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/commons-logging-1.2.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/commons-math3-3.6.1.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/commons-compress-1.19.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/lib/commons-collections4-4.4.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/ooxml-lib/curvesapi-1.06.jar" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/POI/ooxml-lib/xmlbeans-3.1.0.jar" />
+      <element id="library" level="project" name="lib" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-console-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-console-l1-2-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-datetime-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-debug-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-errorhandling-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-file-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-file-l1-2-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-file-l2-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-handle-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-heap-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-interlocked-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-libraryloader-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-localization-l1-2-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-memory-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-namedpipe-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-processenvironment-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-processthreads-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-processthreads-l1-1-1.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-profile-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-rtlsupport-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-string-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-synch-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-synch-l1-2-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-sysinfo-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-timezone-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-core-util-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-conio-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-convert-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-environment-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-filesystem-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-heap-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-locale-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-math-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-multibyte-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-private-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-process-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-runtime-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-stdio-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-string-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-time-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/api-ms-win-crt-utility-l1-1-0.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/decora_sse.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/fxplugins.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/glass.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/glib-lite.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/gstreamer-lite.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/javafx_font.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/javafx_iio.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/jfxmedia.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/jfxwebkit.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/msvcp140.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/prism_common.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/prism_d3d.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/prism_sw.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/ucrtbase.dll" />
+      <element id="file-copy" path="$PROJECT_DIR$/src/javafx-sdk-15.0.1/bin/vcruntime140.dll" />
+    </root>
+  </artifact>
+</component>

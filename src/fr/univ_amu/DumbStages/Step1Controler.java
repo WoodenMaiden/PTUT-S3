@@ -33,6 +33,9 @@ public class Step1Controler {
     public Stage dialog;
 
     @FXML
+    public StackPane infoBox;
+
+    @FXML
     private VBox box;
 
     @FXML
@@ -64,6 +67,16 @@ public class Step1Controler {
         window.setScene(scene);
         window.show();
     }
+    @FXML
+    void goHome(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("load.fxml"));
+        Scene scene = new Scene(root);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+
+    }
+
 
     @FXML
     void handleDragDone(DragEvent event) {
@@ -139,4 +152,19 @@ public class Step1Controler {
     }
 
 
+    public void closeInfo(ActionEvent event) {
+        infoBox.setVisible(false);
+        shadowBox.setVisible(true);
+    }
+
+    public void closeImage(MouseEvent mouseEvent) {
+        infoBox.setVisible(false);
+        shadowBox.setVisible(true);
+    }
+
+
+    public void openInfo(MouseEvent mouseEvent) {
+        infoBox.setVisible(true);
+        shadowBox.setVisible(false);
+    }
 }

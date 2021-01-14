@@ -16,6 +16,7 @@ import javafx.scene.input.DragEvent;
 import javafx.scene.input.MouseEvent;
 import javafx.scene.input.TransferMode;
 import javafx.scene.layout.Pane;
+import javafx.scene.layout.StackPane;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 
@@ -31,6 +32,12 @@ public class Step2Controler implements Initializable {
 
     static File excel ;
     static String path ;
+
+    @FXML
+    public StackPane infoBox;
+
+    @FXML
+    public StackPane shadowBox;
 
     @FXML
     private ChoiceBox<Integer> numberBox = new ChoiceBox<Integer>();
@@ -63,6 +70,15 @@ public class Step2Controler implements Initializable {
     @FXML
     void goStep1(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("step1.fxml"));
+        Scene scene = new Scene(root);
+        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
+        window.setScene(scene);
+        window.show();
+    }
+
+    @FXML
+    void goHome(MouseEvent event) throws IOException {
+        Parent root = FXMLLoader.load(getClass().getResource("load.fxml"));
         Scene scene = new Scene(root);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
@@ -154,6 +170,22 @@ public class Step2Controler implements Initializable {
         tray.add(trayIcon);
         trayIcon.displayMessage("Les fichiers ont été générés sur le bureau", "Forum_Stage.html et Tableau_Etudiant_Entreprises.xls", TrayIcon.MessageType.NONE);
         tray.remove(trayIcon);
+    }
+
+    public void closeInfo(ActionEvent event) {
+        infoBox.setVisible(false);
+        shadowBox.setVisible(true);
+    }
+
+    public void closeImage(MouseEvent mouseEvent) {
+        infoBox.setVisible(false);
+        shadowBox.setVisible(true);
+    }
+
+
+    public void openInfo(MouseEvent mouseEvent) {
+        infoBox.setVisible(true);
+        shadowBox.setVisible(false);
     }
 
 

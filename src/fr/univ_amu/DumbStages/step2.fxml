@@ -18,7 +18,7 @@
                   <Insets left="25.0" top="10.0" />
                </HBox.margin>
             </Label>
-            <ImageView fitHeight="30.0" fitWidth="112.0">
+            <ImageView fx:id="home" fitHeight="30.0" fitWidth="112.0" onMouseClicked="#goHome">
                <image>
                   <Image url="@resources/IUTStage2.png" />
                </image>
@@ -30,7 +30,51 @@
       </HBox>
       <Pane prefHeight="302.0" prefWidth="600.0">
          <children>
-            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="28.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="247.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0); -fx-background-radius: 10px;">
+            <StackPane fx:id="infoBox" layoutX="155.0" layoutY="17.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="270.0" prefWidth="290.0" style="-fx-background-color: #ffffff;">
+               <children>
+                  <Button fx:id="buttonClose" mnemonicParsing="false" onAction="#closeInfo" text="Ok">
+                     <StackPane.margin>
+                        <Insets top="200.0" />
+                     </StackPane.margin>
+                  </Button>
+                  <Label prefHeight="46.0" prefWidth="265.0" wrapText="true" />
+                  <Label prefHeight="28.0" prefWidth="241.0" text="Emploi_Du_Temps_Entreprises" wrapText="true">
+                     <font>
+                        <Font name="System Bold" size="12.0" />
+                     </font>
+                     <StackPane.margin>
+                        <Insets top="80.0" />
+                     </StackPane.margin>
+                  </Label>
+                  <Label prefHeight="93.0" prefWidth="241.0" text="Veuillez glisser-deposer ou appuyer sur &quot;Ouvrir&quot; pour récupérer le fichier Excel des choix des etudiants remplis de l'Etape 1 puis appuyer sur &quot;Valider&quot; pour lancer la génération du fichier" wrapText="true">
+                     <StackPane.margin>
+                        <Insets bottom="130.0" />
+                     </StackPane.margin>
+                  </Label>
+                  <Label prefHeight="28.0" prefWidth="241.0" text="Tableau trier des horaires attribué" wrapText="true">
+                     <StackPane.margin>
+                        <Insets top="112.0" />
+                     </StackPane.margin>
+                     <font>
+                        <Font size="10.0" />
+                     </font>
+                  </Label>
+                  <Label prefHeight="47.0" prefWidth="244.0" text="Les fichier suivants seront générés sur votre bureau :" wrapText="true">
+                     <StackPane.margin>
+                        <Insets top="10.0" />
+                     </StackPane.margin>
+                  </Label>
+                  <ImageView fx:id="close" fitHeight="16.0" fitWidth="23.0" onMouseClicked="#closeImage" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/Close2.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets bottom="210.0" left="240.0" />
+                     </StackPane.margin>
+                  </ImageView>
+               </children>
+            </StackPane>
+            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="28.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="247.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0); -fx-background-radius: 10px;" visible="false">
                <children>
                   <Label fx:id="textid" text="Glisser le fichier excel" textAlignment="CENTER" textFill="#cd1637">
                      <font>
@@ -86,6 +130,14 @@
                         <Insets bottom="125.0" />
                      </StackPane.margin>
                   </ImageView>
+                  <ImageView fx:id="infoImage" fitHeight="20.0" fitWidth="19.0" onMouseClicked="#openInfo" pickOnBounds="true" preserveRatio="true">
+                     <image>
+                        <Image url="@resources/Info2.png" />
+                     </image>
+                     <StackPane.margin>
+                        <Insets bottom="200.0" left="240.0" />
+                     </StackPane.margin>
+                  </ImageView>
                </children>
             </StackPane>
             <Pane fx:id="step3" layoutX="510.0" layoutY="115.0" prefHeight="73.0" prefWidth="69.0">
@@ -95,7 +147,7 @@
                         <Image url="@resources/RedArrow.png" />
                      </image>
                   </ImageView>
-                  <Label layoutX="12.0" layoutY="47.0" text="ETAPE 3" textFill="#cd1637">
+                  <Label layoutX="9.0" layoutY="47.0" text="BIENTÔT" textFill="#cd1637">
                      <font>
                         <Font name="Microsoft JhengHei" size="12.0" />
                      </font>

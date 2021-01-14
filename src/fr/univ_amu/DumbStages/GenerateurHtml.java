@@ -23,7 +23,7 @@ public class    GenerateurHtml {
                     "\n" +
                     "<head>\n" +
                     "  <meta content=\"text/html; charset=UTF-8\" http-equiv=\"content-type\">\n" +
-                    "  <link rel=\"icon\" type=\"image/png\" href=\"" + getClass().getClassLoader().getResource("").getPath() + "Icon.png" + "\" />" +
+                    //"  <link rel=\"icon\" type=\"image/png\" href=\"" + getClass().getClassLoader().getResource("").getPath() + "Icon.png" + "\" />" +
                     "  <title>IUT Stage</title>\n" +
                     "  <link href=\"https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Poppins:wght@400;600&display=swap\" rel=\"stylesheet\">\n" +
                     "  <link href=\"https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500&display=swap\" rel=\"stylesheet\">\n" +

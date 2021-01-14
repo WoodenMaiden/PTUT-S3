@@ -10,7 +10,7 @@
 }
 #numberBox{
     -fx-background-color: white;
-    -fx-border-color: #bb1231 ;
+    -fx-border-color: #bb1231;
     -fx-border-width: 1.5px;
     -fx-border-radius: 10px;
     -fx-text-fill: #bb1231;
@@ -44,7 +44,7 @@
 
 #shadowBox{
     -fx-background-color: white;
-        -fx-background-radius: 10px;
+    -fx-background-radius: 10px;
     -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0)
 }
 #step1:hover{
@@ -52,6 +52,20 @@
     -fx-cursor: hand;
     -fx-translate-x: -3px;
 
+}
+
+#infoBox{
+    -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0);
+    -fx-background-radius: 10px;
+}
+
+#close,#buttonClose,#infoImage:hover{
+    -fx-cursor: hand;
+}
+
+#home{
+    -fx-cursor: hand;
+    -fx-background-color: #ffffff;
 }
 
 #step3:hover{

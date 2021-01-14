@@ -14,7 +14,7 @@ public class GenerateurCss {
                     "    font-weight: 300;\n" +
                     "    width: 100%;\n" +
                     "    position: relative;\n" +
-                    "    background-color: white;\n" +
+                    "    background-color: #F0F0F0;\n" +
                     "    color: #13163E;\n" +
                     "}\n" +
                     "\n" +
@@ -38,10 +38,8 @@ public class GenerateurCss {
                     "    border-bottom: 1px;\n" +
                     "    border-style: solid;\n" +
                     "    justify-content: space-between;\n" +
-                    "    border-color: rgba(19, 22, 62, 0.110);\n" +
-                    "    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
-                    "    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
-                    "     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    "    border-color: #F0F0F0;\n" +
+                    //"     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
                     "}\n" +
                     "\n" +
                     "h1 {\n" +
@@ -120,11 +118,11 @@ public class GenerateurCss {
                     "    background-color: white;\n" +
                     "    border: 1px;\n" +
                     "    border-style: solid;\n" +
-                    "    border-color: rgba(19, 22, 62, 0.110);\n" +
+                    "    border-color: #F0F0F0;\n" +
                     "}\n" +
                     "\n" +
                     "td:hover {\n" +
-                    "    background-color: rgba(19, 22, 62, 0.110);\n" +
+                    "    background-color: #F4F4F4;\n" +
                     "    transition-duration: 100ms;\n" +
                     "    cursor: pointer;\n" +
                     "}\n" +
@@ -136,19 +134,19 @@ public class GenerateurCss {
                     "    width: 100%;\n" +
                     "    justify-content: center;\n" +
                     "}\n" +
-                    "\n" +
-                    "tbody {\n" +
-                    "    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
-                    "    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
-                    "     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
-                    "}\n" +
+                    //"\n" +
+                    //"tbody {\n" +
+                    //"    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    //"    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    //"     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    //"}\n" +
                     "\n" +
                     "footer {\n" +
                     "    position: absolute;\n" +
                     "    width: 100%;\n" +
-                    "    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
-                    "    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
-                    "     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    //"    -webkit-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    //"    -moz-box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
+                    //"     box-shadow: 0px 0px 50px 0px rgba(0,0,0,0.1);\n" +
                     "    height: 50px;\n" +
                     "    display: flex;\n" +
                     "    justify-content: space-between;\n" +
@@ -158,7 +156,8 @@ public class GenerateurCss {
                     "    border-bottom: 0px;\n" +
                     "    align-content: center;\n" +
                     "    border-style: solid;\n" +
-                    "    border-color: rgba(19, 22, 62, 0.110);\n" +
+                    "    background-color: #FFFFFF;\n" +
+                    "    border-color: #F0F0F0;\n" +
                     "}\n" +
                     "\n" +
 
