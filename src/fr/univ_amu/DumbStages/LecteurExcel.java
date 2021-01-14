@@ -113,7 +113,7 @@ public class LecteurExcel {
             LecteurExcel.GenerateEtudiantsFromExcel(fichier);
             System.out.println("Etudiants créés");
 
-            String desktopPathExcel = desktopPath + "\\Tableau_Etudiant_Entreprises.xlsx";
+            String desktopPathExcel = desktopPath + "\\Tableau Etudiant Entreprises.xlsx";
             XSSFWorkbook workbook = new XSSFWorkbook();
             CellStyle borderedCellStyle = workbook.createCellStyle();
             borderedCellStyle.setBorderBottom(BorderStyle.THIN);

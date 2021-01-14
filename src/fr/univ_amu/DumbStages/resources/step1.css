@@ -15,6 +15,7 @@
     -fx-text-fill: white;
 }
 #btnValider:hover{
+    -fx-cursor: hand;
     -fx-background-color: #353467;
     -fx-border-color: #353467 ;
 }
