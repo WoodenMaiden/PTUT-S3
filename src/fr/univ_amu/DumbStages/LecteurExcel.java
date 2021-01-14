@@ -87,6 +87,10 @@ public class LecteurExcel {
     public static void FirstStep() {
         try {
 
+            //Réinitialisation des variables d'entreprises et d'étudiants pour une nouvelle génération
+            mesEntreprises = new Vector<fr.univ_amu.DumbStages.donnees.Entreprise>();
+            mesEtudiants = new Vector<fr.univ_amu.DumbStages.donnees.Etudiant>();
+
             System.out.println("Excel en cours d'accès");
             String desktopPath = ""; // Variable chemin du bureau
             LecteurExcel monLecteur = new LecteurExcel(Step1Controler.path);
@@ -108,7 +112,7 @@ public class LecteurExcel {
             LecteurExcel.GenerateEtudiantsFromExcel(fichier);
             System.out.println("Etudiants créés");
 
-            String desktopPathExcel = desktopPath + "\\Tableau_Etudiant_Entreprises.xls";
+            String desktopPathExcel = desktopPath + "\\Tableau_Etudiant_Entreprises.xlsx";
             XSSFWorkbook workbook = new XSSFWorkbook();
             CellStyle borderedCellStyle = workbook.createCellStyle();
             borderedCellStyle.setBorderBottom(BorderStyle.THIN);
