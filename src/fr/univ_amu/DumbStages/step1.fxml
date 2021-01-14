@@ -30,19 +30,27 @@
       </HBox>
       <Pane prefHeight="302.0" prefWidth="600.0">
          <children>
-            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="42.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="218.0" prefWidth="290.0" style="-fx-background-color: #ffffff;" visible="false">
+            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="32.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="218.0" prefWidth="290.0" style="-fx-background-color: #ffffff;" visible="false">
                <children>
                   <Label fx:id="textid" text="Glisser le fichier excel" textAlignment="CENTER" textFill="#15123b">
                      <font>
                         <Font name="Microsoft JhengHei" size="12.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets top="30.0" />
+                        <Insets bottom="25.0" />
                      </StackPane.margin>
+                     <padding>
+                        <Insets left="20.0" right="20.0" />
+                     </padding>
                   </Label>
-                  <HBox alignment="CENTER" prefHeight="217.0" prefWidth="600.0" spacing="20.0">
+                  <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#chooseDate" prefHeight="25.0" prefWidth="170.0" promptText="Choisir la date du forum">
+                     <StackPane.margin>
+                        <Insets top="43.0" />
+                     </StackPane.margin>
+                  </DatePicker>
+                  <HBox alignment="CENTER" prefHeight="108.0" prefWidth="62.0" snapToPixel="false" spacing="20.0">
                      <children>
-                        <Button fx:id="btnFolder" mnemonicParsing="false" onAction="#handleFolderAction" text="Ouvrir" textFill="#15123b">
+                        <Button fx:id="btnFolder" mnemonicParsing="false" onAction="#handleFolderAction" prefHeight="29.0" prefWidth="66.0" text="Ouvrir" textFill="#15123b">
                            <opaqueInsets>
                               <Insets />
                            </opaqueInsets>
@@ -50,22 +58,25 @@
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnValider" mnemonicParsing="false" onAction="#handleValiderAction" text="Valider">
+                        <Button fx:id="btnValider" mnemonicParsing="false" onAction="#handleValiderAction" prefHeight="29.0" prefWidth="86.0" text="Valider">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Button>
                      </children>
                      <StackPane.margin>
-                        <Insets top="110.0" />
+                        <Insets bottom="40.0" top="170.0" />
                      </StackPane.margin>
+                     <opaqueInsets>
+                        <Insets top="40.0" />
+                     </opaqueInsets>
                   </HBox>
                   <ImageView fx:id="drop" fitHeight="62.0" fitWidth="59.0" preserveRatio="true">
                      <image>
                         <Image url="@resources/Download.png" />
                      </image>
                      <StackPane.margin>
-                        <Insets bottom="80.0" />
+                        <Insets bottom="110.0" />
                      </StackPane.margin>
                   </ImageView>
                   <ImageView fx:id="infoImage" fitHeight="20.0" fitWidth="19.0" onMouseClicked="#openInfo" pickOnBounds="true" preserveRatio="true">
@@ -94,7 +105,7 @@
                         <Insets top="40.0" />
                      </StackPane.margin>
                   </Label>
-                  <Label prefHeight="93.0" prefWidth="241.0" text="Veuillez glisser-deposer ou appuyer sur &quot;Ouvrir&quot; pour récupérer le fichier Excel de la liste des entreprises puis appuyer sur &quot;Valider&quot; pour lancer la génération des fichiers" wrapText="true">
+                  <Label prefHeight="93.0" prefWidth="241.0" text="Veuillez glisser-déposer ou appuyer sur &quot;Ouvrir&quot; pour récupérer le fichier Excel de la liste des entreprises puis choisissez la date du forum, enfin appuyé sur &quot;Valider&quot; pour lancer la génération des fichiers" wrapText="true">
                      <StackPane.margin>
                         <Insets bottom="170.0" />
                      </StackPane.margin>

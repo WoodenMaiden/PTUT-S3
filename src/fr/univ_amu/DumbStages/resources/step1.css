@@ -1,6 +1,6 @@
 
 
-.button{
+#btnFolder, #buttonClose{
     -fx-background-color: white;
     -fx-border-color: #15123b ;
     -fx-border-width: 1.5px;
@@ -19,7 +19,7 @@
     -fx-border-color: #353467 ;
 }
 
-.button:hover{
+#btnFolder:hover, #buttonClose:hover{
     -fx-background-color: #15123b;
     -fx-border-radius: 10px;
     -fx-text-fill: white;

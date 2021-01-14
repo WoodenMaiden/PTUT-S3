@@ -3,6 +3,7 @@ package fr.univ_amu.DumbStages;
 import java.io.File;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.time.format.DateTimeFormatter;
 import java.util.Scanner;
 import java.util.Vector;
 
@@ -100,14 +101,14 @@ public class LecteurExcel {
             File desktopFile = fsv.getHomeDirectory();
 
             desktopPath = desktopFile.getAbsolutePath(); // Ajout du chemin dans la variable fait pour
-            String desktopPathHtml = desktopPath + "\\index.html";
+            String desktopPathHtml = desktopPath + "\\Forum Stage.html";
 
             //Recupération du fichier Excel
             XSSFWorkbook fichier = monLecteur.getFichier();
 
             LecteurExcel.GenerateHTMLAndMesEntreprises(fichier, desktopPathHtml);
-
-            GenerateurHtml html = new GenerateurHtml(desktopPathHtml,"21/01/2021");
+            System.out.println(Step1Controler.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
+            GenerateurHtml html = new GenerateurHtml(desktopPathHtml,Step1Controler.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
             LecteurExcel.GenerateEtudiantsFromExcel(fichier);
             System.out.println("Etudiants créés");

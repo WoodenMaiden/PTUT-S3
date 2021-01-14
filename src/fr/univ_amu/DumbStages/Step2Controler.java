@@ -109,7 +109,7 @@ public class Step2Controler implements Initializable {
 
     @FXML
     void handleDragExit(DragEvent event) {
-        drop.setImage(new Image(getClass().getResourceAsStream("resources/Download.png")));
+        drop.setImage(new Image(getClass().getResourceAsStream("resources/Download2.png")));
     }
 
     @FXML
@@ -168,7 +168,7 @@ public class Step2Controler implements Initializable {
         //Set tooltip text for the tray icon
         trayIcon.setToolTip("IUT Stage");
         tray.add(trayIcon);
-        trayIcon.displayMessage("Les fichiers ont été générés sur le bureau", "Forum_Stage.html et Tableau_Etudiant_Entreprises.xls", TrayIcon.MessageType.NONE);
+        trayIcon.displayMessage("Les fichiers ont été générés sur le bureau", "Emploi du temps entreprises.xlsx", TrayIcon.MessageType.NONE);
         tray.remove(trayIcon);
     }
 

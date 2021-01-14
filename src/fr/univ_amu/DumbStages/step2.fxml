@@ -30,7 +30,7 @@
       </HBox>
       <Pane prefHeight="302.0" prefWidth="600.0">
          <children>
-            <StackPane fx:id="infoBox" layoutX="155.0" layoutY="17.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="270.0" prefWidth="290.0" style="-fx-background-color: #ffffff;">
+            <StackPane fx:id="infoBox" layoutX="155.0" layoutY="10.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="283.0" prefWidth="290.0" style="-fx-background-color: #ffffff;">
                <children>
                   <Button fx:id="buttonClose" mnemonicParsing="false" onAction="#closeInfo" text="Ok">
                      <StackPane.margin>
@@ -43,17 +43,17 @@
                         <Font name="System Bold" size="12.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets top="80.0" />
+                        <Insets top="100.0" />
                      </StackPane.margin>
                   </Label>
-                  <Label prefHeight="93.0" prefWidth="241.0" text="Veuillez glisser-deposer ou appuyer sur &quot;Ouvrir&quot; pour récupérer le fichier Excel des choix des etudiants remplis de l'Etape 1 puis appuyer sur &quot;Valider&quot; pour lancer la génération du fichier" wrapText="true">
+                  <Label prefHeight="107.0" prefWidth="241.0" text="Veuillez glisser-deposer ou appuyer sur &quot;Ouvrir&quot; pour récupérer le fichier Excel des choix des etudiants remplis de l'Etape 1 puis  selectionner le nombre d'horaire souhaité enfin appuyer sur &quot;Valider&quot; pour lancer la génération du fichier" wrapText="true">
                      <StackPane.margin>
                         <Insets bottom="130.0" />
                      </StackPane.margin>
                   </Label>
                   <Label prefHeight="28.0" prefWidth="241.0" text="Tableau trier des horaires attribué" wrapText="true">
                      <StackPane.margin>
-                        <Insets top="112.0" />
+                        <Insets top="132.0" />
                      </StackPane.margin>
                      <font>
                         <Font size="10.0" />
@@ -61,7 +61,7 @@
                   </Label>
                   <Label prefHeight="47.0" prefWidth="244.0" text="Les fichier suivants seront générés sur votre bureau :" wrapText="true">
                      <StackPane.margin>
-                        <Insets top="10.0" />
+                        <Insets top="30.0" />
                      </StackPane.margin>
                   </Label>
                   <ImageView fx:id="close" fitHeight="16.0" fitWidth="23.0" onMouseClicked="#closeImage" pickOnBounds="true" preserveRatio="true">
@@ -74,7 +74,7 @@
                   </ImageView>
                </children>
             </StackPane>
-            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="28.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="247.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0); -fx-background-radius: 10px;" visible="false">
+            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="28.0" onDragDone="#handleDragDone" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="247.0" prefWidth="290.0" style="-fx-background-color: #ffffff; -fx-effect: dropshadow(gaussian, #DCDCDC, 50, 0.00005 , 0,0); -fx-background-radius: 10px;" visible="false">
                <children>
                   <Label fx:id="textid" text="Glisser le fichier excel" textAlignment="CENTER" textFill="#cd1637">
                      <font>
@@ -84,7 +84,7 @@
                         <Insets bottom="15.0" />
                      </StackPane.margin>
                      <padding>
-                        <Insets right="25.0" />
+                        <Insets left="25.0" right="25.0" />
                      </padding>
                   </Label>
                   <HBox maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="29.0" prefWidth="147.0">

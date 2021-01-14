@@ -7,6 +7,7 @@ package fr.univ_amu.DumbStages;
         import javafx.scene.Parent;
         import javafx.scene.Scene;
         import javafx.scene.control.Button;
+        import javafx.scene.control.DatePicker;
         import javafx.scene.control.Label;
         import javafx.scene.image.Image;
         import javafx.scene.image.ImageView;
@@ -24,6 +25,7 @@ package fr.univ_amu.DumbStages;
         import java.awt.*;
         import java.io.File;
         import java.io.IOException;
+        import java.time.LocalDate;
         import java.util.List;
 
 public class Step1Controler {
@@ -31,9 +33,12 @@ public class Step1Controler {
     static File excel ;
     static String path ;
     public Stage dialog;
+    static LocalDate localDate;
 
     @FXML
     public StackPane infoBox;
+    @FXML
+    public DatePicker datePicker;
 
     @FXML
     private VBox box;
@@ -123,9 +128,14 @@ public class Step1Controler {
     void handleValiderAction(ActionEvent event) throws AWTException, IOException {
         String str = excel.getName();
         String strExtension = str.substring(str.indexOf('.'));
-        if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
+        if(localDate == null){
+            textid.setText("Choisissez une date valide");
+
+        }
+        else if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
             textid.setText("Fichier accepté");
             LecteurExcel.start();
+            localDate = null;
             if (SystemTray.isSupported())
                 displayProcessFinishWindow();
         }
@@ -166,5 +176,9 @@ public class Step1Controler {
     public void openInfo(MouseEvent mouseEvent) {
         infoBox.setVisible(true);
         shadowBox.setVisible(false);
+    }
+
+    public void chooseDate(ActionEvent actionEvent) {
+        localDate = datePicker.getValue();
     }
 }
