@@ -33,19 +33,6 @@ public class LecteurExcel {
     public XSSFWorkbook getFichier(){
         return monExcel;
     }
-    public XSSFSheet getmonExcel2() {
-        return monExcel2;
-    }//?
-
-    public void ajouterEtudiant (fr.univ_amu.DumbStages.donnees.Etudiant etudiant, Sheet sheet) { //Deuxième point du forum de stage
-        sheet.createRow(this.monExcel2.getLastRowNum()+1).createCell(0).setCellValue(etudiant.getNom() +
-                etudiant.getPrenom() +", "+ etudiant.getGroupe());
-    } //?
-
-    public void ajouterEntreprise (fr.univ_amu.DumbStages.donnees.Entreprise entreprise) { //Deuxième point du forum de stage
-        this.monExcel2.getRow(0).createCell(this.monExcel2.getRow(0).getLastCellNum()+1).setCellValue(
-                entreprise.getNom_en());
-    } //?
 
     public static void GenerateHTMLAndMesEntreprises(XSSFWorkbook fichier, String desktopPathHtml) throws IOException {
         XSSFSheet mySheet = fichier.getSheetAt(0);
@@ -58,10 +45,15 @@ public class LecteurExcel {
                 representants[0] = "Inconnu";
                 String nom_en = "Inconnu";
                 String url = "Inconnu";
+                String lienzoom = "Inconnu";
+                String mdpzoom = "Inconnu";
+
                 for (Cell cell: row) {
                     if (cell.getColumnIndex() == 0) nom_en = cell.getStringCellValue();
                     else if (cell.getColumnIndex() == 1) representants[0] = cell.getStringCellValue();
                     else if (cell.getColumnIndex() == 2) url = cell.getStringCellValue();
+                    else if (cell.getColumnIndex() == 3) lienzoom = cell.getStringCellValue();
+                    else if (cell.getColumnIndex() == 4) mdpzoom = cell.getStringCellValue();
                 }
                 Entreprise ent = new Entreprise(nom_en, representants, url);
                 mesEntreprises.add(ent);
@@ -85,7 +77,7 @@ public class LecteurExcel {
                 System.out.println(etu.getNom()+" "+etu.getPrenom()+" "+etu.getGroupe());
             }
         }
-    }
+    }   //GenerateEtudiantsFromExcel
 
     public static void FirstStep() {
         try {
@@ -140,18 +132,18 @@ public class LecteurExcel {
                 row = sheet.createRow((short) 1);
                 row.createCell(0).setCellValue("GROUPE "+ j);
 
-                //row.setHeightInPoints(40);
-
                 row = sheet.createRow((short) 2);
                 row.createCell(0).setCellValue("Nom");
                 row.createCell(1).setCellValue("Prénom");
 
+                //Génération des entreprises sur la première ligne
                 for (int i = 0; i < mesEntreprises.size(); ++i) {
                     row.createCell(i + 2).setCellValue(mesEntreprises.elementAt(i).getNom_en());
                     row.getCell(i + 2).setCellStyle(borderedCellStyle);
                     sheet.autoSizeColumn(i + 2);
                 }
 
+                //Génération des étudiants dans le Excel selon leur groupe sur la première colonne
                 int i = 0;
                 for (int k = 0; k < mesEtudiants.size(); ++k) {
                     Etudiant monEtudiant = mesEtudiants.get(k);
@@ -181,7 +173,7 @@ public class LecteurExcel {
         } finally {
             System.out.println("programme terminé");
         }
-    }
+    }   //FirstStep
 
     public static void start() {
         FirstStep();
