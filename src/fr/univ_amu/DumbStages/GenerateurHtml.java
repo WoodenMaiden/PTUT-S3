@@ -23,7 +23,7 @@ public class    GenerateurHtml {
                     "\n" +
                     "<head>\n" +
                     "  <meta content=\"text/html; charset=UTF-8\" http-equiv=\"content-type\">\n" +
-                    //"  <link rel=\"icon\" type=\"image/png\" href=\"" + getClass().getClassLoader().getResource("").getPath() + "Icon.png" + "\" />" +
+                    "  <link rel=\"icon\" type=\"image/png\" href=\"" + getClass().getClassLoader().getResource("").getPath() + "Icon.png" + "\" />" +
                     "  <title>IUT Stage</title>\n" +
                     "  <link href=\"https://fonts.googleapis.com/css2?family=Open+Sans:wght@600&family=Poppins:wght@400;600&display=swap\" rel=\"stylesheet\">\n" +
                     "  <link href=\"https://fonts.googleapis.com/css2?family=Work+Sans:wght@300;500&display=swap\" rel=\"stylesheet\">\n" +
@@ -101,7 +101,7 @@ public class    GenerateurHtml {
         for (String rep : uneEntreprise.getRepresentants())
             this.codeHtml = this.codeHtml + rep +"</br>";
         this.codeHtml = this.codeHtml + "</td><td><a href=\""+uneEntreprise.getUrl()+"\">"+uneEntreprise.getNom_en()+"</a></td>" +
-                "<td><a href="+uneEntreprise.getLienZoom()+"> </a> </br> Mot de passe: "+uneEntreprise.getMdpZoom()+"</td>\n</tr>";
+                "<td><a href="+uneEntreprise.getLienZoom()+">Lien Zoom</a> </br> Mot de passe: "+uneEntreprise.getMdpZoom()+"</td>\n</tr>";
     }//Insert dans CodeHtml une ligne du tableau contenant le nom de l'entreprise, des représentants, ainsi que l'url de leur site
 
     public void setFinHtml() {
