@@ -1,6 +1,10 @@
 package fr.univ_amu.DumbStages;
 
+import com.jfoenix.controls.JFXToggleButton;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
@@ -32,12 +36,22 @@ public class Step2Controler implements Initializable {
 
     static File excel ;
     static String path ;
+    static String endFile;
 
     @FXML
     public StackPane infoBox;
 
     @FXML
     public StackPane shadowBox;
+
+    @FXML
+    public Label textJourney;
+
+    @FXML
+    public JFXToggleButton switchButton = new JFXToggleButton();
+
+    @FXML
+    public Label textExcel;
 
     @FXML
     private ChoiceBox<Integer> numberBox = new ChoiceBox<Integer>();
@@ -63,8 +77,51 @@ public class Step2Controler implements Initializable {
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
-        numberBox.getItems().addAll(3,4,5,6,7,8,9,10,11,12,13,14,15,16,17,18,19,20);
+        numberBox.getItems().addAll(3,4,5,6,7,8);
         numberBox.setValue(5);
+
+        switchButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if(switchButton.isSelected()) {
+                    textid.setText("Glisser le fichier excel");
+                    if(excel != null)
+                        excel = null ;
+                    textExcel.setText("Emploi du temps entreprises Apres-Midi.xlsx");
+                    textJourney.setText("APRES-MIDI");
+                    btnValider.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            try {
+                                handleValiderActionApresmidi(actionEvent);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+
+                        }
+                    });
+                }
+                else{
+                    textid.setText("Glisser le fichier excel");
+                    textJourney.setText("MATIN");
+                    if(excel != null)
+                        excel = null;
+                    textExcel.setText("Emploi du temps entreprises Matin.xlsx");
+                    btnValider.setOnAction(new EventHandler<ActionEvent>() {
+                        @Override
+                        public void handle(ActionEvent actionEvent) {
+                            try {
+                                handleValiderActionMatin(actionEvent);
+                            } catch (Exception e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+                }
+
+            }
+        });
+
     }
 
     @FXML
@@ -136,7 +193,7 @@ public class Step2Controler implements Initializable {
     }
 
     @FXML
-    void handleValiderAction(ActionEvent event) throws Exception {
+    void handleValiderActionMatin(ActionEvent event) throws Exception {
 
         FileSystemView fsv = FileSystemView.getFileSystemView(); // Recuperation du chemin du bureau
         File desktopFile = fsv.getHomeDirectory();
@@ -146,6 +203,29 @@ public class Step2Controler implements Initializable {
         String str = excel.getName();
         String strExtension = str.substring(str.indexOf('.'));
         if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
+            endFile = "Matin";
+            textid.setText("Fichier accepté");
+            GenerateurEdt generateurEdt = new GenerateurEdt(excel.getAbsolutePath(),desktopPath,numberBox.getValue());
+            generateurEdt.run();
+            if (SystemTray.isSupported())
+                displayProcessFinishWindow();
+        }
+        else
+            textid.setText("Fichier invalide");
+    }
+
+    @FXML
+    void handleValiderActionApresmidi(ActionEvent event) throws Exception {
+
+        FileSystemView fsv = FileSystemView.getFileSystemView(); // Recuperation du chemin du bureau
+        File desktopFile = fsv.getHomeDirectory();
+        String desktopPath = desktopFile.getAbsolutePath();
+
+
+        String str = excel.getName();
+        String strExtension = str.substring(str.indexOf('.'));
+        if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
+            endFile = "Apres-Midi";
             textid.setText("Fichier accepté");
             GenerateurEdt generateurEdt = new GenerateurEdt(excel.getAbsolutePath(),desktopPath,numberBox.getValue());
             generateurEdt.run();

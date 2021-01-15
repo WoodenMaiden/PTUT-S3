@@ -41,5 +41,6 @@
       </library>
     </orderEntry>
     <orderEntry type="library" name="lib" level="project" />
+    <orderEntry type="library" name="jfoenix-9.0.10" level="project" />
   </component>
 </module>

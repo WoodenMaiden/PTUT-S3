@@ -22,6 +22,7 @@ public class LecteurExcel {
     private XSSFSheet monExcel2; //?
     private int nbEtudiants = 0;
     private int nbGroupes;
+    private String endFileString;
 
     public static Vector<fr.univ_amu.DumbStages.donnees.Entreprise> mesEntreprises = new Vector<fr.univ_amu.DumbStages.donnees.Entreprise>();
     public static Vector<fr.univ_amu.DumbStages.donnees.Etudiant> mesEtudiants = new Vector<fr.univ_amu.DumbStages.donnees.Etudiant>();
@@ -101,7 +102,7 @@ public class LecteurExcel {
             File desktopFile = fsv.getHomeDirectory();
 
             desktopPath = desktopFile.getAbsolutePath(); // Ajout du chemin dans la variable fait pour
-            String desktopPathHtml = desktopPath + "\\Forum Stage.html";
+            String desktopPathHtml = desktopPath + "\\Forum Stage "+ Step1Controler.endFile +".html";
 
             //Recupération du fichier Excel
             XSSFWorkbook fichier = monLecteur.getFichier();
@@ -113,7 +114,7 @@ public class LecteurExcel {
             LecteurExcel.GenerateEtudiantsFromExcel(fichier);
             System.out.println("Etudiants créés");
 
-            String desktopPathExcel = desktopPath + "\\Tableau Etudiant Entreprises.xlsx";
+            String desktopPathExcel = desktopPath + "\\Tableau Etudiant Entreprises "+ Step1Controler.endFile +".xlsx";
             XSSFWorkbook workbook = new XSSFWorkbook();
             CellStyle borderedCellStyle = workbook.createCellStyle();
             borderedCellStyle.setBorderBottom(BorderStyle.THIN);
