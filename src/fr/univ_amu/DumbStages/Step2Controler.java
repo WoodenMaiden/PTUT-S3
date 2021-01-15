@@ -68,7 +68,7 @@ public class Step2Controler implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         //Intitialisation des valeur de bouton déroulant nombre d'heure
-        numberBox.getItems().addAll(3,4,5,6,7,8);
+        numberBox.getItems().addAll(2,3,4,5,6,7,8,9,10);
         numberBox.setValue(5);
 
         //Initialisation de l'action du boutton "Valider"

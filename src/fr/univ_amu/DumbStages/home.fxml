@@ -50,7 +50,7 @@
                   <Insets bottom="100.0" />
                </StackPane.margin>
             </Label>
-            <Label prefHeight="112.0" prefWidth="97.0" text="Génére le tableau de choix des etudiants par groupe " textAlignment="CENTER" textFill="#cd1637" textOverrun="CLIP" wrapText="true">
+            <Label prefHeight="112.0" prefWidth="97.0" text="Génére les emplois du temps des rendez vous à partir des listes  remplis de l'étape 1" textAlignment="CENTER" textFill="#cd1637" textOverrun="CLIP" wrapText="true">
                <opaqueInsets>
                   <Insets />
                </opaqueInsets>
