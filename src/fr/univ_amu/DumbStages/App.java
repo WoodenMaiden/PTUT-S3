@@ -8,15 +8,15 @@ import javafx.scene.Scene;
 import javafx.scene.image.Image;
 import javafx.stage.Stage;
 
-import java.io.IOException;
-
+// Application JavaFX appeller dans la class main
 public class App extends Application{
     private Stage window;
 
+    //Creation et configuration de la fenetre
     @Override
     public void start(Stage stage) throws Exception {
         window = stage ;
-        Parent root = FXMLLoader.load(getClass().getResource("load.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
         Scene scene = new Scene(root);
         window.getIcons().add(new Image(getClass().getResourceAsStream("resources/Icon.png")));
         window.setTitle("IUT Stage");

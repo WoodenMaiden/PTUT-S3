@@ -5,7 +5,8 @@ import fr.univ_amu.DumbStages.donnees.*;
 import java.awt.*;
 import java.io.*;
 
-public class    GenerateurHtml {
+//Generateur du fichier HTML de l'Etape 1
+public class GenerateurHtml {
     private File html;
     private String finHtml;
     private String codeHtml;
@@ -79,7 +80,7 @@ public class    GenerateurHtml {
                 "\n" +
                 "      <caption>\n" +
                 "        <h3>\n" +
-                "          Liste des entreprises participant au forum\n" +
+                "          Liste des entreprises participant au forum le " + Step1Controler.endFile.toLowerCase()+ "\n" +
                 "        </h3>\n" +
                 "      </caption>\n" +
                 "\n" +

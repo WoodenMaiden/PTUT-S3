@@ -40,46 +40,50 @@ public class Step2Controler implements Initializable {
 
     @FXML
     public StackPane infoBox;
-
     @FXML
     public StackPane shadowBox;
-
     @FXML
     public Label textJourney;
-
     @FXML
     public JFXToggleButton switchButton = new JFXToggleButton();
-
     @FXML
     public Label textExcel;
-
     @FXML
     private ChoiceBox<Integer> numberBox = new ChoiceBox<Integer>();
-
     @FXML
     private ImageView drop;
-
     @FXML
     private Label textid;
-
     @FXML
     private Button btnFolder;
-
     @FXML
     private Button btnValider;
-
     @FXML
     private Pane step2;
-
     @FXML
     private ImageView arrow;
 
+    //Initialisation de certaine variables et leur propriété
     @FXML
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
+        //Intitialisation des valeur de bouton déroulant nombre d'heure
         numberBox.getItems().addAll(3,4,5,6,7,8);
         numberBox.setValue(5);
 
+        //Initialisation de l'action du boutton "Valider"
+        btnValider.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent actionEvent) {
+                try {
+                    handleValiderAction(actionEvent,"Matin");
+                } catch (Exception e) {
+                    e.printStackTrace();
+                }
+            }
+        });
+
+        //Initialisation du Boutton Switch et attribution des methode selon son activation
         switchButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
             @Override
             public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
@@ -93,7 +97,7 @@ public class Step2Controler implements Initializable {
                         @Override
                         public void handle(ActionEvent actionEvent) {
                             try {
-                                handleValiderActionApresmidi(actionEvent);
+                                handleValiderAction(actionEvent,"Apres-Midi");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -111,7 +115,7 @@ public class Step2Controler implements Initializable {
                         @Override
                         public void handle(ActionEvent actionEvent) {
                             try {
-                                handleValiderActionMatin(actionEvent);
+                                handleValiderAction(actionEvent,"Matin");
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -124,6 +128,7 @@ public class Step2Controler implements Initializable {
 
     }
 
+    //Changement de scene vers la scene step1.fxml
     @FXML
     void goStep1(MouseEvent event) throws IOException {
         Parent root = FXMLLoader.load(getClass().getResource("step1.fxml"));
@@ -133,29 +138,17 @@ public class Step2Controler implements Initializable {
         window.show();
     }
 
+    //Changement de scene vers la scene home.fxml
     @FXML
     void goHome(MouseEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("load.fxml"));
+        Parent root = FXMLLoader.load(getClass().getResource("home.fxml"));
         Scene scene = new Scene(root);
         Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
         window.setScene(scene);
         window.show();
     }
 
-    @FXML
-    void start(ActionEvent event) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("step1.fxml"));
-        Scene scene = new Scene(root);
-        Stage window = (Stage)((Node)event.getSource()).getScene().getWindow();
-        window.setScene(scene);
-        window.show();
-    }
-
-    @FXML
-    void handleDragDone(DragEvent event) {
-
-    }
-
+    //Récuperation du fichier lors d'un glisser-déposer
     @FXML
     void handleDragDropped(DragEvent event) {
         List<File> files = event.getDragboard().getFiles();
@@ -164,11 +157,13 @@ public class Step2Controler implements Initializable {
         this.textid.setText(path);
     }
 
+    //Change l'affichage de l'image lorsque l'on lache ou quitte l'emplacement du glisser-deposer
     @FXML
     void handleDragExit(DragEvent event) {
         drop.setImage(new Image(getClass().getResourceAsStream("resources/Download2.png")));
     }
 
+    //Change l'afficher au survole d'un fichier sur le glisser-deposer
     @FXML
     void handleDragOver(DragEvent event) {
         if (event.getDragboard().hasFiles()){
@@ -179,6 +174,7 @@ public class Step2Controler implements Initializable {
             drop.setImage(new Image(getClass().getResourceAsStream("resources/Download2.png")));
     }
 
+    //Configuration du button "Ouvrir" pour récuperer un fichier en entrée
     @FXML
     void handleFolderAction(ActionEvent event) {
         FileChooser fc = new FileChooser();
@@ -192,8 +188,9 @@ public class Step2Controler implements Initializable {
             textid.setText("Fichier invalide");
     }
 
+    //Configuration du boutton "Valider" qui lance la génération si le fichier et la date sont correcte et affecte un String à ajouter à la fin des fichiers générer
     @FXML
-    void handleValiderActionMatin(ActionEvent event) throws Exception {
+    void handleValiderAction(ActionEvent event, String endFileStr) throws Exception {
 
         FileSystemView fsv = FileSystemView.getFileSystemView(); // Recuperation du chemin du bureau
         File desktopFile = fsv.getHomeDirectory();
@@ -203,7 +200,7 @@ public class Step2Controler implements Initializable {
         String str = excel.getName();
         String strExtension = str.substring(str.indexOf('.'));
         if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
-            endFile = "Matin";
+            endFile = endFileStr;
             textid.setText("Fichier accepté");
             GenerateurEdt generateurEdt = new GenerateurEdt(excel.getAbsolutePath(),desktopPath,numberBox.getValue());
             generateurEdt.run();
@@ -214,28 +211,7 @@ public class Step2Controler implements Initializable {
             textid.setText("Fichier invalide");
     }
 
-    @FXML
-    void handleValiderActionApresmidi(ActionEvent event) throws Exception {
-
-        FileSystemView fsv = FileSystemView.getFileSystemView(); // Recuperation du chemin du bureau
-        File desktopFile = fsv.getHomeDirectory();
-        String desktopPath = desktopFile.getAbsolutePath();
-
-
-        String str = excel.getName();
-        String strExtension = str.substring(str.indexOf('.'));
-        if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){
-            endFile = "Apres-Midi";
-            textid.setText("Fichier accepté");
-            GenerateurEdt generateurEdt = new GenerateurEdt(excel.getAbsolutePath(),desktopPath,numberBox.getValue());
-            generateurEdt.run();
-            if (SystemTray.isSupported())
-                displayProcessFinishWindow();
-        }
-        else
-            textid.setText("Fichier invalide");
-    }
-
+    //Affichage du message de fin de génération des fichiers
     public void displayProcessFinishWindow() throws AWTException {
         SystemTray tray = SystemTray.getSystemTray();
 
@@ -248,21 +224,24 @@ public class Step2Controler implements Initializable {
         //Set tooltip text for the tray icon
         trayIcon.setToolTip("IUT Stage");
         tray.add(trayIcon);
-        trayIcon.displayMessage("Les fichiers ont été générés sur le bureau", "Emploi du temps entreprises.xlsx", TrayIcon.MessageType.NONE);
+        trayIcon.displayMessage("Les fichiers ont été générés sur le bureau", textExcel.getText(), TrayIcon.MessageType.NONE);
         tray.remove(trayIcon);
     }
 
+    //Ferme la fenetre d'information et ouvre le glisser déposer
     public void closeInfo(ActionEvent event) {
         infoBox.setVisible(false);
         shadowBox.setVisible(true);
     }
 
+    //Ferme la fenetre d'information et ouvre le glisser déposer
     public void closeImage(MouseEvent mouseEvent) {
         infoBox.setVisible(false);
         shadowBox.setVisible(true);
     }
 
 
+    //Ouvre la fenetre d'information et ferme le glisser déposer
     public void openInfo(MouseEvent mouseEvent) {
         infoBox.setVisible(true);
         shadowBox.setVisible(false);
