@@ -9,36 +9,30 @@
 
 <VBox fx:id="box" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffff;" stylesheets="@resources/step1.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univ_amu.DumbStages.Step1Controler">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="600.0">
+      <Pane prefHeight="56.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" text="ETAPE 1  " textFill="WHITE">
+            <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" text="ETAPE 1  " textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="15.0" />
                </font>
-               <HBox.margin>
-                  <Insets left="25.0" top="10.0" />
-               </HBox.margin>
             </Label>
-            <ImageView fx:id="home" fitHeight="30.0" fitWidth="112.0" onMouseClicked="#goHome">
+            <ImageView fx:id="home" fitHeight="30.0" fitWidth="112.0" layoutX="466.0" layoutY="16.0" onMouseClicked="#goHome">
                <image>
                   <Image url="@resources/IUTStage.PNG" />
                </image>
-               <HBox.margin>
-                  <Insets left="370.0" top="10.0" />
-               </HBox.margin>
             </ImageView>
          </children>
-      </HBox>
+      </Pane>
       <Pane prefHeight="302.0" prefWidth="600.0">
          <children>
-            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="17.0" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="250.0" prefWidth="290.0" style="-fx-background-color: #ffffff;" visible="false">
+            <StackPane fx:id="shadowBox" layoutX="155.0" layoutY="23.0" onDragDropped="#handleDragDropped" onDragExited="#handleDragExit" onDragOver="#handleDragOver" onMouseDragExited="#handleDragExit" prefHeight="219.0" prefWidth="290.0" style="-fx-background-color: #ffffff;">
                <children>
                   <Label fx:id="textid" text="Glisser le fichier excel" textAlignment="CENTER" textFill="#15123b">
                      <font>
                         <Font name="Microsoft JhengHei" size="12.0" />
                      </font>
                      <StackPane.margin>
-                        <Insets bottom="5.0" />
+                        <Insets bottom="25.0" />
                      </StackPane.margin>
                      <padding>
                         <Insets left="20.0" right="20.0" />
@@ -46,7 +40,7 @@
                   </Label>
                   <DatePicker fx:id="datePicker" focusTraversable="false" onAction="#chooseDate" prefHeight="25.0" prefWidth="170.0" promptText="Choisir la date du forum">
                      <StackPane.margin>
-                        <Insets top="63.0" />
+                        <Insets top="43.0" />
                      </StackPane.margin>
                   </DatePicker>
                   <HBox alignment="CENTER" prefHeight="108.0" prefWidth="62.0" snapToPixel="false" spacing="20.0">
@@ -59,7 +53,7 @@
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
                         </Button>
-                        <Button fx:id="btnValider" mnemonicParsing="false" prefHeight="29.0" prefWidth="64.0" text="Valider">
+                        <Button fx:id="btnValider" mnemonicParsing="false" onAction="#handleValiderAction" prefHeight="29.0" prefWidth="64.0" text="Valider">
                            <font>
                               <Font name="Microsoft JhengHei" size="12.0" />
                            </font>
@@ -69,7 +63,7 @@
                         </Button>
                      </children>
                      <StackPane.margin>
-                        <Insets bottom="40.0" top="200.0" />
+                        <Insets bottom="40.0" top="190.0" />
                      </StackPane.margin>
                      <opaqueInsets>
                         <Insets />
@@ -80,7 +74,7 @@
                         <Image url="@resources/Download.png" />
                      </image>
                      <StackPane.margin>
-                        <Insets bottom="90.0" />
+                        <Insets bottom="110.0" />
                      </StackPane.margin>
                   </ImageView>
                   <ImageView fx:id="infoImage" fitHeight="20.0" fitWidth="19.0" onMouseClicked="#openInfo" pickOnBounds="true" preserveRatio="true">
@@ -88,29 +82,12 @@
                         <Image url="@resources/Info.png" />
                      </image>
                      <StackPane.margin>
-                        <Insets bottom="210.0" left="220.0" />
+                        <Insets bottom="200.0" left="220.0" />
                      </StackPane.margin>
                   </ImageView>
-                  <Pane maxHeight="40.0" maxWidth="100.0" minHeight="20.0" minWidth="100.0" prefHeight="100.0" prefWidth="100.0">
-                     <children>
-                        <Label layoutX="6.0" layoutY="12.0" text="AM" textFill="#15123b">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </Label>
-                        <JFXToggleButton fx:id="switchButton" layoutX="14.0" layoutY="-4.0" prefHeight="0.0" prefWidth="94.0" size="8.0" text="PM" textFill="#15123b" toggleColor="#fafafa" toggleLineColor="#15123b">
-                           <font>
-                              <Font size="11.0" />
-                           </font>
-                        </JFXToggleButton>
-                     </children>
-                     <StackPane.margin>
-                        <Insets bottom="210.0" right="170.0" />
-                     </StackPane.margin>
-                  </Pane>
                </children>
             </StackPane>
-            <StackPane fx:id="infoBox" layoutX="155.0" layoutY="-17.0" prefHeight="338.0" prefWidth="290.0" style="-fx-background-color: #ffffff;">
+            <StackPane fx:id="infoBox" layoutX="155.0" layoutY="-17.0" prefHeight="338.0" prefWidth="290.0" style="-fx-background-color: #ffffff;" visible="false">
                <children>
                   <Button fx:id="buttonClose" mnemonicParsing="false" onAction="#closeInfo" text="Ok">
                      <StackPane.margin>
@@ -185,11 +162,6 @@
                </children>
             </Pane>
             <JFXTogglePane layoutX="62.0" layoutY="6.0" prefWidth="59.0" />
-            <Label fx:id="textJourney" layoutX="99.0" layoutY="-34.0" prefHeight="20.0" prefWidth="124.0" style="-fx-text-fill: #15123b;" text="MATIN" textFill="#15123b">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
          </children></Pane>
    </children>
 </VBox>

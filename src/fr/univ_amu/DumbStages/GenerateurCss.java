@@ -11,9 +11,9 @@ public class GenerateurCss {
         script = "html, body {\n" +
                     "    margin: 0;\n" +
                     "    padding: 0;\n" +
+                    "    width: 100%;\n" +
                     "    font-family: 'Work Sans', sans-serif;\n" +
                     "    font-weight: 300;\n" +
-                    "    width: 100%;\n" +
                     "    position: relative;\n" +
                     "    background-color: #F0F0F0;\n" +
                     "    color: #13163E;\n" +
@@ -24,6 +24,7 @@ public class GenerateurCss {
                     "    margin: 0;\n" +
                     "    min-height: 100%;\n" +
                     "    top: 0;\n" +
+                    "    width: 100%;\n" +
                     "    right: 0;\n" +
                     "    left: 0;\n" +
                     "    display: flex;\n" +
@@ -131,6 +132,7 @@ public class GenerateurCss {
                     "div {\n" +
                     "    margin-top: 50px;\n" +
                     "    margin-bottom: 50px;\n" +
+                    "    flex-direction: column;\n" +
                     "    display: flex;\n" +
                     "    width: 100%;\n" +
                     "    justify-content: center;\n" +

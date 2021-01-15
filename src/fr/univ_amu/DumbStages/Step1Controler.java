@@ -33,11 +33,10 @@ package fr.univ_amu.DumbStages;
         import java.util.List;
         import java.util.ResourceBundle;
 // Controleur du fichier step1.fxml on retrouve ici les methodes néccessaire au bon fonctionnement de l'affichage
-public class Step1Controler implements Initializable {
+public class Step1Controler {
 
     static File excel ;
     static String path ;
-    static String endFile;
     static LocalDate localDate;
     public Stage dialog;
 
@@ -45,10 +44,6 @@ public class Step1Controler implements Initializable {
     public StackPane infoBox;
     @FXML
     public DatePicker datePicker;
-    @FXML
-    public JFXToggleButton switchButton;
-    @FXML
-    public Label textJourney;
     @FXML
     public Label textHtml;
     @FXML
@@ -69,75 +64,6 @@ public class Step1Controler implements Initializable {
     private StackPane shadowBox;
     @FXML
     private ImageView arrow;
-
-    //Initialisation de certaine variables et leur propriété
-    @FXML
-    @Override
-    public void initialize(URL url, ResourceBundle resourceBundle) {
-
-        //Initialisation de l'action du boutton "Valider"
-        btnValider.setOnAction(new EventHandler<ActionEvent>() {
-            @Override
-            public void handle(ActionEvent actionEvent) {
-                try {
-                    handleValiderAction(actionEvent,"Matin");
-                } catch (AWTException e) {
-                    e.printStackTrace();
-                } catch (IOException e) {
-                    e.printStackTrace();
-                }
-            }
-        });
-
-
-        //Initialisation du Boutton Switch et attribution des methode selon son activation
-        switchButton.selectedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if(switchButton.isSelected()==true) {
-                    textid.setText("Glisser le fichier excel");
-                    if(excel != null)
-                        excel = null ;
-                    textHtml.setText("Forum Stage Apres-Midi.html");
-                    textExcel.setText("Tableau Etudiant Entreprises Apres-Midi.xlsx");
-                    textJourney.setText("APRES-MIDI");
-                    btnValider.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent actionEvent) {
-                            try {
-                                handleValiderAction(actionEvent,"Apres-Midi");
-                            } catch (AWTException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                }
-                else{
-                    textid.setText("Glisser le fichier excel");
-                    if(excel != null)
-                        excel = null ;
-                    textHtml.setText("Forum Stage Matin.html");
-                    textExcel.setText("Tableau Etudiant Entreprises Matin.xlsx");
-                    textJourney.setText("MATIN");
-                    btnValider.setOnAction(new EventHandler<ActionEvent>() {
-                        @Override
-                        public void handle(ActionEvent actionEvent) {
-                            try {
-                                handleValiderAction(actionEvent,"Matin");
-                            } catch (AWTException e) {
-                                e.printStackTrace();
-                            } catch (IOException e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    });
-                }
-
-            }
-        });
-    }
 
     //Changement de scene vers la scene step2.fxml
     @FXML
@@ -203,8 +129,7 @@ public class Step1Controler implements Initializable {
 
     //Configuration du boutton "Valider" qui lance la génération si le fichier et la date sont correcte et affecte un String à ajouter à la fin des fichiers générer
     @FXML
-    void handleValiderAction(ActionEvent event, String endFileStr ) throws AWTException, IOException {
-        endFile = endFileStr;
+    void handleValiderAction(ActionEvent event) throws AWTException, IOException {
         String str = excel.getName();
         String strExtension = str.substring(str.indexOf('.'));
         if(localDate == null){
@@ -247,12 +172,14 @@ public class Step1Controler implements Initializable {
     //Ferme la fenetre d'information et ouvre le glisser déposer
     public void closeImage(MouseEvent mouseEvent) {
         infoBox.setVisible(false);
+        infoBox.setDisable(true);
         shadowBox.setVisible(true);
     }
 
     //Ouvre la fenetre d'information et ferme le glisser déposer
     public void openInfo(MouseEvent mouseEvent) {
         infoBox.setVisible(true);
+        infoBox.setDisable(false);
         shadowBox.setVisible(false);
     }
 

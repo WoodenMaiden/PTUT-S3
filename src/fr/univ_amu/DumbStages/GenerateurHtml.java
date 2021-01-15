@@ -10,6 +10,7 @@ public class GenerateurHtml {
     private File html;
     private String finHtml;
     private String codeHtml;
+    private String journey;
     private File favicon = new File("resources/Icon.png");
     private File current = new File ("");
     GenerateurHtml(String strSortie,String date) throws IOException { //Constructeur
@@ -56,13 +57,20 @@ public class GenerateurHtml {
                     "</html>"); //Création de la première partie de l'html dans FinHtml
         }
         setDate(date);
-        debutTableau();
+        debutTableau("le matin");
 
-        for (fr.univ_amu.DumbStages.donnees.Entreprise ent: LecteurExcel.mesEntreprises) {
+        for (fr.univ_amu.DumbStages.donnees.Entreprise ent: LecteurExcel.mesEntreprisesMatin) {
             ajouterEntreprise(ent);
         }
 
         finTableau ();
+
+        debutTableau("l'apres-midi");
+        for (fr.univ_amu.DumbStages.donnees.Entreprise ent: LecteurExcel.mesEntreprisesApresMidi) {
+            ajouterEntreprise(ent);
+        }
+        finTableau();
+
         setFinHtml();
         ecritDansFichier();
         ouvrirFichier();
@@ -75,12 +83,12 @@ public class GenerateurHtml {
                 "  <div>";
     }//Insert dans Codehtml l'Html affichant le titre de la page
 
-    public void debutTableau () {
+    public void debutTableau (String journey) {
         codeHtml = codeHtml + "<table border=\"1\" cellpadding=\"15\">\n" +
                 "\n" +
                 "      <caption>\n" +
                 "        <h3>\n" +
-                "          Liste des entreprises participant au forum le " + Step1Controler.endFile.toLowerCase()+ "\n" +
+                "          Liste des entreprises participant au forum " + journey + "\n" +
                 "        </h3>\n" +
                 "      </caption>\n" +
                 "\n" +

@@ -196,7 +196,6 @@ public class Step2Controler implements Initializable {
         File desktopFile = fsv.getHomeDirectory();
         String desktopPath = desktopFile.getAbsolutePath();
 
-
         String str = excel.getName();
         String strExtension = str.substring(str.indexOf('.'));
         if (strExtension.equals(".xlsx") || strExtension.equals(".XLSX") || strExtension.equals(".XLS")|| strExtension.equals(".XLS") ){

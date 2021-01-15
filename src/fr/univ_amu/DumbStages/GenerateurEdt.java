@@ -277,7 +277,7 @@ public class GenerateurEdt {
 
 
             XSSFWorkbook ExcelEntreprises = new XSSFWorkbook();
-            File EDTentreprises = new File(RepertSortie, "Emploi du temps entreprises.xlsx");
+            File EDTentreprises = new File(RepertSortie, "Emploi du temps entreprises "+Step2Controler.endFile+".xlsx");
 
 
             XSSFCellStyle texte = ExcelEntreprises.createCellStyle();

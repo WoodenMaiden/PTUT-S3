@@ -42,7 +42,7 @@
     -fx-translate-x: 3px;
 }
 
-#close,#buttonClose,#infoImage:hover{
+#infoImage:hover{
     -fx-cursor: hand;
 }
 

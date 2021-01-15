@@ -1,34 +1,42 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<?import com.jfoenix.controls.*?>
-<?import javafx.geometry.*?>
-<?import javafx.scene.control.*?>
-<?import javafx.scene.image.*?>
-<?import javafx.scene.layout.*?>
-<?import javafx.scene.text.*?>
+<?import com.jfoenix.controls.JFXToggleButton?>
+<?import javafx.geometry.Insets?>
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.image.Image?>
+<?import javafx.scene.image.ImageView?>
+<?import javafx.scene.layout.HBox?>
+<?import javafx.scene.layout.Pane?>
+<?import javafx.scene.layout.StackPane?>
+<?import javafx.scene.layout.VBox?>
+<?import javafx.scene.text.Font?>
 
 <VBox fx:id="box" alignment="TOP_CENTER" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="400.0" prefWidth="600.0" style="-fx-background-color: #ffffffff;" stylesheets="@resources/step2.css" xmlns="http://javafx.com/javafx/11.0.1" xmlns:fx="http://javafx.com/fxml/1" fx:controller="fr.univ_amu.DumbStages.Step2Controler">
    <children>
-      <HBox alignment="CENTER_LEFT" prefHeight="56.0" prefWidth="600.0">
+      <Pane prefHeight="56.0" prefWidth="600.0">
          <children>
-            <Label alignment="CENTER_RIGHT" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" text="ETAPE 2  " textFill="WHITE">
+            <Label alignment="CENTER_RIGHT" layoutX="14.0" layoutY="14.0" prefHeight="31.0" prefWidth="73.0" style="-fx-background-color: #ffffff; -fx-background-radius: 10px;" text="ETAPE 2  " textFill="WHITE">
                <font>
                   <Font name="Microsoft JhengHei" size="15.0" />
                </font>
-               <HBox.margin>
-                  <Insets left="25.0" top="10.0" />
-               </HBox.margin>
             </Label>
-            <ImageView fx:id="home" fitHeight="30.0" fitWidth="112.0" onMouseClicked="#goHome">
+            <ImageView fx:id="home" fitHeight="30.0" fitWidth="112.0" layoutX="466.0" layoutY="16.0" onMouseClicked="#goHome">
                <image>
                   <Image url="@resources/IUTStage2.png" />
                </image>
-               <HBox.margin>
-                  <Insets left="370.0" top="10.0" />
-               </HBox.margin>
             </ImageView>
+            <Label fx:id="textJourney" layoutX="87.0" layoutY="17.0" prefHeight="20.0" prefWidth="124.0" style="-fx-text-fill: #cd1637;" text="MATIN" textFill="#15123b">
+               <font>
+                  <Font name="System Bold" size="16.0" />
+               </font>
+               <padding>
+                  <Insets top="1.0" />
+               </padding>
+            </Label>
          </children>
-      </HBox>
+      </Pane>
       <Pane prefHeight="302.0" prefWidth="600.0">
          <children>
             <StackPane fx:id="infoBox" layoutX="155.0" layoutY="-6.0" prefHeight="315.0" prefWidth="290.0" style="-fx-background-color: #ffffff;">
@@ -189,11 +197,6 @@
                   </Label>
                </children>
             </Pane>
-            <Label fx:id="textJourney" layoutX="99.0" layoutY="-34.0" prefHeight="20.0" prefWidth="124.0" style="-fx-text-fill: #cd1637;" text="MATIN" textFill="#15123b">
-               <font>
-                  <Font name="System Bold" size="16.0" />
-               </font>
-            </Label>
          </children></Pane>
    </children>
 </VBox>
