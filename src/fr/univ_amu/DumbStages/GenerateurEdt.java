@@ -277,7 +277,7 @@ public class GenerateurEdt {
 
 
             XSSFWorkbook ExcelEntreprises = new XSSFWorkbook();
-            File EDTentreprises = new File(RepertSortie, "Emploi du temps entreprises "+ Step2Controler.endFile +".xlsx");
+            File EDTentreprises = new File(RepertSortie, "Emploi du temps entreprises.xlsx");
 
 
             XSSFCellStyle texte = ExcelEntreprises.createCellStyle();
@@ -313,17 +313,33 @@ public class GenerateurEdt {
 
             // On a h horaires, de v places chacun, y entreprises, x élèves pouvant assister z fois (maximum h horaires)
             // on doit respecter : nb_places_totales ≥ nb_etudiants * nb_horaires
-            // ∀ h,y,x ∈ N \ {0}, z ∈ N / z ∈ ]0,5]
+            // ∀ h,y,x ∈ N \ {0}, z ∈ N / z ∈ ]0,h]
             // h*v*y ≥ x*z
 
 
-            int nb_places_necessaires = 7;
-            int nb_entretiens_et = this.nombreHoraires;
+            int nb_places_necessaires = 6;
+
+            /* représente le nombre d'entretiens auquels les étudiants vont assister : si on a un nombre d'entreprises E inférieures à un nombre d'horaires H alors
+            l'étudiant ne va pas assister a H entreprises car cela impliquerais qu'il doit assister plusieurs fois à un entretien avec une entreprise (et un out of array aussi),
+            dans ce cas on prend E horaires.
+
+
+            Dans le cas contraire si E>=H, cela voudrait dire que l'étudiant doit assister à plusieurs entretiens en même temps, dans ce cas là on prends H horaires
+             */
+
+            int nb_entretiens_et;
+
+            if (mesEntreprises.size() < this.nombreHoraires){
+                nb_entretiens_et = mesEntreprises.size();
+            }
+            else /*mesEntreprises.size() => this.nombreHoraires*/ {
+                nb_entretiens_et = this.nombreHoraires;
+            }
+
 
             while (true) {
 
                 if (this.nombreHoraires * nb_places_necessaires * mesEntreprises.size() >= mesEtudiants.size() * nb_entretiens_et) {
-
                     break;
                 } else if (nb_entretiens_et <= 3) {
 
@@ -353,7 +369,7 @@ public class GenerateurEdt {
             }
 
 
-            // TODO changer normaliser de manière a homogéniser la matrice de choix (éviter qu'une entreprise aie tous les 1)
+            // TODO changer normaliser de manière a homogénéiser la matrice de choix (éviter qu'une entreprise aie tous les 1)
 
             // ici on remplit le tableau, on va d'abord faire une copie de la matrice de choix
 
@@ -373,12 +389,31 @@ public class GenerateurEdt {
 
             //créons TOUTES les cellules
             int indexEntreprises = 0;
-            for (int i = 1; i < mesEntreprises.size() * nb_places_necessaires; ++i) {
-                XSSFRow rowDeRemplissage = maFeuille.createRow(i);
+
+            int cpt = 0;
+
+            System.out.println("\nnb places : " + nb_entretiens_et);
+
+            for (int i = 0; i < mesEntreprises.size() * nb_places_necessaires; ++i) {
+
+                XSSFRow rowDeRemplissage = maFeuille.createRow(i+1);
+
                 for (int j = 0; j < this.nombreHoraires + 1; ++j) {
+
+                    if (cpt >= nb_places_necessaires ){
+                        ++indexEntreprises;
+                        cpt = 0;
+                    }
+
                     if (j == 0) {
                         XSSFCell cellule_fusionee = rowDeRemplissage.createCell(0);
-                        if (i % nb_places_necessaires == 0) ++indexEntreprises;
+
+                        System.out.println("cpt : "+ cpt);
+                        //si on ajoute pas + 1 a nb_places_necessaires on se retrouve avec des incrémentations de indexEntreprises...
+
+                        System.out.println("on crée une cellule à " + cellule_fusionee.getAddress() + " avec la valeur " + mesEntreprises.get(indexEntreprises).getNom_en());
+
+                        //...qui vont causer des out of index ici
                         cellule_fusionee.setCellValue(mesEntreprises.get(indexEntreprises).getNom_en());
 
                         cellule_fusionee.setCellStyle(titres);
@@ -388,10 +423,16 @@ public class GenerateurEdt {
                     XSSFCell cellDeRemplissage = rowDeRemplissage.createCell(j);
                     cellDeRemplissage.setCellValue(" ");
                     cellDeRemplissage.setCellStyle(texte);
-                    if (i % nb_places_necessaires == 0) cellDeRemplissage.setCellStyle(dernieresCellules);
+                    if ((i+1) % nb_places_necessaires == 0) cellDeRemplissage.setCellStyle(dernieresCellules);
                     cellDeRemplissage.getSheet().autoSizeColumn(cellDeRemplissage.getColumnIndex());
                 }
+
+                ++cpt;
+
             }
+
+            System.out.println("\nnbre entretiens : " + nb_entretiens_et);
+            System.out.println("nbre de places max : " + nb_places_necessaires);
 
 
             //Ici on va consommer les lignes du vecteur matriciel matrice2 une par une de manière aléatoire (lignes qui représentent les étudiants), pour chaque ligne on va placer les étudiants dans l'ordre des notes
@@ -424,6 +465,9 @@ public class GenerateurEdt {
                 //pour chaque note <=> pour chaque entreprise
                 while (noteSelect < nb_entretiens_et + 1) {
 
+                    System.out.println(noteSelect);
+
+                    int entreprise_associee = Lmatrice2.indexOf(noteSelect);
 
                     int parcours_vecteur = 0;
 
@@ -431,7 +475,7 @@ public class GenerateurEdt {
                     while (parcours_vecteur < map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice)).length){
 
 
-                        int entreprise_associee = Lmatrice2.indexOf(noteSelect);
+//                        int entreprise_associee = Lmatrice2.indexOf(noteSelect);
 
                         // ..on regarde si l'étudiant est placé dans la colonne du excel parcours_vecteur+1...
 
@@ -465,11 +509,11 @@ public class GenerateurEdt {
                         } // if (map_Etudiant_ColomnesLibres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] == false)
 
                           ++parcours_vecteur;
-                          ++noteSelect;
                           Lmatrice2.set(entreprise_associee, (byte) 0);
 
                     } // while (parcours_vecteur < map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice)).length)
 
+                    ++noteSelect;
 
                 }//while (noteSelect < nb_entretiens_et + 1)
 
@@ -534,8 +578,17 @@ public class GenerateurEdt {
                 }
             }
 
+        System.out.println("max : " + maFeuille.getLastRowNum());
             for (int h = 1; h < this.nombreHoraires + 1; ++h) {
-                for (int y = 1; y < maFeuille.getLastRowNum(); ++y){
+                System.out.println("h : " + h);
+                int y = 0;
+                while (true){
+                    ++y;
+                    System.out.println("    y : " + y);
+
+                    //si la row est nulle est donc qu'on est à la fin du tableau on s'arrête là
+                    if (maFeuille.getRow(y) == null) break;
+
                     //si la cellule est vide on l'ignore
                     if (maFeuille.getRow(y).getCell(h).getStringCellValue().isEmpty() || maFeuille.getRow(y).getCell(h).getStringCellValue().isBlank()) continue;
 
@@ -543,7 +596,7 @@ public class GenerateurEdt {
                     String entreprise = maFeuille.getRow(y).getCell(0).getStringCellValue();
 
                     int y2 = 1;
-                    // on défile les ligns jusqu'à ce qu'on arrive à l'étudiant concerné
+                    // on défile les lignes jusqu'à ce qu'on arrive à l'étudiant concerné
                     for (; y2 < feuille_et.getLastRowNum() && !(feuille_et.getRow(y2).getCell(0).getStringCellValue().equals(étudiant)); ++y2);
 
                     //et on place l'entreprise
@@ -551,7 +604,6 @@ public class GenerateurEdt {
 
                 }
             }
-
 
 
         FileOutputStream fileOut = new FileOutputStream(EDTentreprises);
