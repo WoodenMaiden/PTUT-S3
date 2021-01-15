@@ -19,25 +19,54 @@ import javax.swing.filechooser.FileSystemView;
 public class LecteurExcel {
 
     private XSSFWorkbook monExcel;
-    private XSSFSheet monExcel2; //?
     private int nbEtudiants = 0;
-    private int nbGroupes;
+    private Vector<Integer> groupes;
     private String endFileString;
 
     public static Vector<fr.univ_amu.DumbStages.donnees.Entreprise> mesEntreprises = new Vector<fr.univ_amu.DumbStages.donnees.Entreprise>();
     public static Vector<fr.univ_amu.DumbStages.donnees.Etudiant> mesEtudiants = new Vector<fr.univ_amu.DumbStages.donnees.Etudiant>();
 
-
     public LecteurExcel(String path) throws IOException, InvalidFormatException {
         this.monExcel = new XSSFWorkbook(new java.io.File(path));
+        this.groupes = new Vector<Integer>();
     }
 
     public XSSFWorkbook getFichier(){
         return monExcel;
     }
 
-    public static void GenerateHTMLAndMesEntreprises(XSSFWorkbook fichier, String desktopPathHtml) throws IOException {
-        XSSFSheet mySheet = fichier.getSheetAt(0);
+    public void setFichier(XSSFWorkbook monExcel) {
+        this.monExcel = monExcel;
+    }
+
+    public void addGroupe( int grp ) {
+        this.groupes.add(grp);
+    }
+
+    public int getGroupesSize() {
+        return this.groupes.size();
+    }
+
+    public int findGroupe(int value) {
+        if (this.groupes.size() == 0) return -1;
+
+        int k = 0;
+        while (k < this.groupes.size()) {
+            if (this.groupes.get(k) == value) return this.groupes.get(k);
+            ++k;
+        }
+        return -1;
+    } //findGroupe
+
+    public void verifierEtIncrementerNombreDeGroupe(int value) {
+        if (value > 0)
+            if (this.findGroupe(value) != value) {
+                this.addGroupe(value);
+            }
+    } //verifierEtIncrementerNombreDeGroupe
+
+    public static void generateMesEntreprises(LecteurExcel lecteur, String desktopPathHtml) throws IOException {
+        XSSFSheet mySheet = lecteur.getFichier().getSheetAt(0);
 
         for(Row row: mySheet)
         {
@@ -64,23 +93,22 @@ public class LecteurExcel {
                 ent.setLienZoom(lienzoom);
                 ent.setMdpZoom(mdpzoom_string);
                 mesEntreprises.add(ent);
-                //ent.show();
             }
         }
-    }   //GenerateHTMLAndReturnEntreprises
+    }   //GenerateMesEntreprises
 
-    public static void GenerateEtudiantsFromExcel(XSSFWorkbook fichier) {
-        XSSFSheet mySheet = fichier.getSheetAt(1);
+    public static void generateEtudiantsFromExcel(LecteurExcel lecteur) {
+        XSSFSheet mySheet = lecteur.getFichier().getSheetAt(1);
 
         int i = 0;
         for(Row row: mySheet)
         {
-
             System.out.println(i++);
             if (row.getRowNum() > 0)
             {
                 Etudiant etu = new Etudiant(row.getCell(0).getStringCellValue(), row.getCell(1).getStringCellValue(), "Groupe "+(int) row.getCell(2).getNumericCellValue());
                 mesEtudiants.add(etu);
+                lecteur.verifierEtIncrementerNombreDeGroupe((int) row.getCell(2).getNumericCellValue());
                 System.out.println(etu.getNom()+" "+etu.getPrenom()+" "+etu.getGroupe());
             }
         }
@@ -95,6 +123,8 @@ public class LecteurExcel {
 
             System.out.println("Excel en cours d'accès");
             String desktopPath = ""; // Variable chemin du bureau
+
+            //Creation du Lecteur d'Excel
             LecteurExcel monLecteur = new LecteurExcel(Step1Controler.path);
             System.out.println("Excel d'entrée accédé !");
 
@@ -104,18 +134,19 @@ public class LecteurExcel {
             desktopPath = desktopFile.getAbsolutePath(); // Ajout du chemin dans la variable fait pour
             String desktopPathHtml = desktopPath + "\\Forum Stage "+ Step1Controler.endFile +".html";
 
-            //Recupération du fichier Excel
-            XSSFWorkbook fichier = monLecteur.getFichier();
-
-            LecteurExcel.GenerateHTMLAndMesEntreprises(fichier, desktopPathHtml);
+            //Generation des entreprises dans le vecteur mesEntreprises
+            LecteurExcel.generateMesEntreprises(monLecteur, desktopPathHtml);
             System.out.println(Step1Controler.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
             GenerateurHtml html = new GenerateurHtml(desktopPathHtml,Step1Controler.localDate.format(DateTimeFormatter.ofPattern("dd/MM/yyyy")));
 
-            LecteurExcel.GenerateEtudiantsFromExcel(fichier);
+            //Génération des étudiants dans le vecteur mesEtudiants
+            LecteurExcel.generateEtudiantsFromExcel(monLecteur);
             System.out.println("Etudiants créés");
 
             String desktopPathExcel = desktopPath + "\\Tableau Etudiant Entreprises "+ Step1Controler.endFile +".xlsx";
             XSSFWorkbook workbook = new XSSFWorkbook();
+
+            //Ajoute d'un style de case pré-défini avec bordure
             CellStyle borderedCellStyle = workbook.createCellStyle();
             borderedCellStyle.setBorderBottom(BorderStyle.THIN);
             borderedCellStyle.setBorderLeft(BorderStyle.THIN);
@@ -124,20 +155,25 @@ public class LecteurExcel {
             borderedCellStyle.setVerticalAlignment(VerticalAlignment.CENTER);
             borderedCellStyle.setAlignment(HorizontalAlignment.CENTER);
 
-            System.out.println("Workbook 2 créé");
+            System.out.println("Workbook de sortie créé");
 
-            for (int j = 1; j <= 3; ++j) {
+            //Remplissage du Excel de sortie: Tableau_Etudiant_Entreprise.xlsx
+            for (int j = 1; j <= monLecteur.getGroupesSize(); ++j) {
+                //Création d'une feuille par groupe
                 System.out.println("Creation Feuille Groupe "+j);
                 XSSFSheet sheet = workbook.createSheet("GROUPE "+ j);
 
                 Row row = sheet.createRow((short) 0);
                 row.createCell(0).setCellValue("2ème ANNEE");
 
+                //Définition de la taille d'un groupe selon le nombre d'étudiant dans le même groupe
                 int sizeGroupe = 0;
                 for (Etudiant etu : mesEtudiants) {
                     if (etu.getGroupe().equals("Groupe "+j)) sizeGroupe++;
                 }
 
+
+                //remplissage des cases de légende
                 row.createCell(1).setCellValue(sizeGroupe + " étudiants");
 
                 row = sheet.createRow((short) 1);
@@ -172,6 +208,7 @@ public class LecteurExcel {
                 }
             }
 
+            //Création et écriture d'un fichier de sortie
             FileOutputStream fileOut = new FileOutputStream(desktopPathExcel);
             workbook.write(fileOut);
             fileOut.close();
