@@ -147,19 +147,19 @@ public class GenerateurEdt {
         }
     }
 
-    private void normaliser(byte[] ligne_mat){
+    private void normaliser(short[] ligne_mat){
         // cette methode permet de vérifier si la ligne en question est valide, la normalisation a lieue si :
         // - Un nombre est trop élevé
         // - Un nombre est < 0,
-        // - Un nombre es en double,
+        // - Un nombre est en double,
         // - Il n'y a pas de nombres écrit,
         // - Il y a une chaine de caractère au lieu du nombre (est converti sous forme d'entier négatif dans remplirChoix())
         // dans ces cas là on va mettre au hasard
 
 
 
-        Vector<Byte> entiers_dispo = new Vector<Byte>(); // liste des entiers de 1 à n entreprises disponibles quand un d'eux est présent dans ligne_mat il sera "consommé" (supprimé)
-        for(byte i = 1; i <= mesEntreprises.size(); ++i) entiers_dispo.add(i);
+        Vector<Short> entiers_dispo = new Vector<Short>(); // liste des entiers de 1 à n entreprises disponibles quand un d'eux est présent dans ligne_mat il sera "consommé" (supprimé)
+        for(short i = 1; i <= mesEntreprises.size(); ++i) entiers_dispo.add(i);
 
 
         Vector<Integer> i_cases_invalides = new Vector<Integer>();
@@ -204,50 +204,39 @@ public class GenerateurEdt {
 
 
 
-    private void remplirChoix(byte[][] mat){
+    private void remplirChoix(short[][] mat){
 
 
-        byte matx = 0;
-        byte maty = 0;
-        int x = 1;
+        short matx = 0;
+        short maty = 0;
 
         for (int indexFeuille = 0; indexFeuille < Entree.getNumberOfSheets(); ++indexFeuille) {
+//            maty = 0;
+            for (Row R : Entree.getSheetAt(indexFeuille)){
 
-            for (Row ligne : Entree.getSheetAt(indexFeuille)) {
-                if (ligne.getRowNum() < 3) continue;
+                if (R.getRowNum() < 3 || R == null) continue;
 
-                x = 1;
                 matx = 0;
-                while (true) {
-                    ++x;
-                    XSSFCell cetteCellule = (XSSFCell) ligne.getCell(x);
-                    if (x <= mesEntreprises.size()){
+                for (Cell C : R){
+                    if (C.getColumnIndex() < 2 || C == null || C.getStringCellValue().isBlank() || C.getStringCellValue().isEmpty()) continue;
 
-                        if (cetteCellule == null){
-                            mat[maty][matx] = -1;
-                        }
-                        else if (cetteCellule.getCellType() != CellType.NUMERIC){
-                            mat[maty][matx] = -1;
-                        }
-                        else if (cetteCellule.getNumericCellValue() < - 128 || cetteCellule.getNumericCellValue() > 127){
-                            mat[maty][matx] = -1;
-                        }
-                        else {
-                            String val = cetteCellule.getRawValue();
-                            Scanner sc = new Scanner(val);
-                            mat[maty][matx] = sc.nextByte();
-                        }
-
-                        ++matx;
-
-                        normaliser(mat[maty]);
+                    if (C.getCellType() != CellType.NUMERIC){
+                        //on prends en compte le décalage du aux en têtes d'ou les soustractions
+                        mat[maty][matx] = -1;
                     }
-
-
-                    else break;
+                    else if (C.getNumericCellValue() < -32768 || C.getNumericCellValue() > 32767){
+                        mat[maty][matx] = -1;
+                    }
+                    else{
+                        mat[maty][matx] = (short) C.getNumericCellValue();
+                    }
+                    ++matx;
                 }
+
+                normaliser(mat[maty]);
                 ++maty;
             }
+
         }
     }
 
@@ -255,7 +244,7 @@ public class GenerateurEdt {
     public void run () throws Exception {
         remplirVecteurs();
 
-        byte[][] matrice_de_choix = new byte[mesEtudiants.size()][mesEntreprises.size()];
+        short[][] matrice_de_choix = new short[mesEtudiants.size()][mesEntreprises.size()];
 
         remplirChoix(matrice_de_choix);
 
@@ -373,12 +362,12 @@ public class GenerateurEdt {
 
             // ici on remplit le tableau, on va d'abord faire une copie de la matrice de choix
 
-            Vector<Vector<Byte>> matrice2 = new Vector<Vector<Byte>>();
-            for (byte[] ligne : matrice_de_choix) {
+            Vector<Vector<Short>> matrice2 = new Vector<Vector<Short>>();
+            for (short[] ligne : matrice_de_choix) {
 
-                Vector<Byte> Vligne = new Vector<Byte>();
-                for (byte b : ligne)
-                    Vligne.add(b);
+                Vector<Short> Vligne = new Vector<Short>();
+                for (short s : ligne)
+                    Vligne.add(s);
 
                 matrice2.add(Vligne);
             }
@@ -408,12 +397,6 @@ public class GenerateurEdt {
                     if (j == 0) {
                         XSSFCell cellule_fusionee = rowDeRemplissage.createCell(0);
 
-                        System.out.println("cpt : "+ cpt);
-                        //si on ajoute pas + 1 a nb_places_necessaires on se retrouve avec des incrémentations de indexEntreprises...
-
-                        System.out.println("on crée une cellule à " + cellule_fusionee.getAddress() + " avec la valeur " + mesEntreprises.get(indexEntreprises).getNom_en());
-
-                        //...qui vont causer des out of index ici
                         cellule_fusionee.setCellValue(mesEntreprises.get(indexEntreprises).getNom_en());
 
                         cellule_fusionee.setCellStyle(titres);
@@ -431,10 +414,6 @@ public class GenerateurEdt {
 
             }
 
-            System.out.println("\nnbre entretiens : " + nb_entretiens_et);
-            System.out.println("nbre de places max : " + nb_places_necessaires);
-
-
             //Ici on va consommer les lignes du vecteur matriciel matrice2 une par une de manière aléatoire (lignes qui représentent les étudiants), pour chaque ligne on va placer les étudiants dans l'ordre des notes
             // attention les yeux ça risque de piquer
             while (estFini == false) {
@@ -442,7 +421,7 @@ public class GenerateurEdt {
                 //pour chaque étudiant
                 // "démonstration par l'absurde" : ici on va partir du principe que estFini est vrai
                 estFini = true;
-                for (Vector<Byte> v : matrice2) {
+                for (Vector<Short> v : matrice2) {
                     if (v.size() != 0) {
                         estFini = false;
                     }
@@ -457,15 +436,13 @@ public class GenerateurEdt {
                     iy_matrice = aleaEtu.nextInt(matrice2.size());
                 }
 
-                Vector<Byte> Lmatrice2 = matrice2.get(iy_matrice);
+                Vector<Short> Lmatrice2 = matrice2.get(iy_matrice);
 
-                byte noteSelect = 1;
+                short noteSelect = 1;
 
 
                 //pour chaque note <=> pour chaque entreprise
                 while (noteSelect < nb_entretiens_et + 1) {
-
-                    System.out.println(noteSelect);
 
                     int entreprise_associee = Lmatrice2.indexOf(noteSelect);
 
@@ -509,7 +486,7 @@ public class GenerateurEdt {
                         } // if (map_Etudiant_ColomnesLibres.get(mesEtudiants.get(iy_matrice))[parcours_vecteur] == false)
 
                           ++parcours_vecteur;
-                          Lmatrice2.set(entreprise_associee, (byte) 0);
+                          Lmatrice2.set(entreprise_associee, (short) 0);
 
                     } // while (parcours_vecteur < map_Etudiant_Colonnes_Libres.get(mesEtudiants.get(iy_matrice)).length)
 
@@ -578,13 +555,11 @@ public class GenerateurEdt {
                 }
             }
 
-        System.out.println("max : " + maFeuille.getLastRowNum());
             for (int h = 1; h < this.nombreHoraires + 1; ++h) {
-                System.out.println("h : " + h);
+
                 int y = 0;
                 while (true){
                     ++y;
-                    System.out.println("    y : " + y);
 
                     //si la row est nulle est donc qu'on est à la fin du tableau on s'arrête là
                     if (maFeuille.getRow(y) == null) break;
@@ -611,5 +586,11 @@ public class GenerateurEdt {
         fileOut.close();
 
     }
+
+    public static void main(String[] args) throws Exception {
+        GenerateurEdt G = new GenerateurEdt("/home/yann/Bureau/testmat.xlsx", "/home/yann/Bureau", 5);
+        G.run();
+    }
+
 
 }
